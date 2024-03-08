@@ -10,7 +10,6 @@
         <collection property="studentSubjects" ofType="com.demo.MybatisApplication.model.SubjectEntity" column="id" select="selectSubjectsByStudentId"/>
     </resultMap>
 
-    <!-- Select Student by ID -->
     <select id="selectStudentById" resultMap="StudentResultMap" parameterType="long">
         SELECT
         id,
@@ -21,8 +20,7 @@
         id = #{id}
     </select>
 
-    <!-- Select Subjects by Student ID -->
-    <select id="selectSubjectsByStudentId" parameterType="long" resultType="com.demo.MybatisApplication.model.Subject">
+    <select id="selectSubjectsByStudentId" parameterType="long" resultType="com.demo.MybatisApplication.model.SubjectEntity">
         SELECT
         subject_id,
         subject_name
