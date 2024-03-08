@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.MybatisApplication.repository.SubjectRepository" >
+    <!-- result map for SubjectEntity -->
+    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
+        <id property="id" column="id" />
+        <result property="subjectName" column="subject_name" />
+    </resultMap>
+
+    <!-- select statement to retrieve a subject by its id -->
+    <select id="selectSubjectById" resultMap="SubjectResultMap" parameterType="long">
+        SELECT
+        id,
+        subject_name
+        FROM
+        subjects
+        WHERE
+        id = #{subjectId}
+    </select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.MybatisApplication.repository.StudentRepository" >
+
+    <!-- Result Map for Student -->
+    <resultMap id="StudentResultMap" type="com.demo.MybatisApplication.model.StudentEntity">
+        <id property="id" column="id"/>
+        <result property="studentName" column="student_name"/>
+        <collection property="studentSubjects" ofType="com.demo.MybatisApplication.model.SubjectEntity" column="id" select="selectSubjectsByStudentId"/>
+    </resultMap>
+
+    <!-- Select Student by ID -->
+    <select id="selectStudentById" resultMap="StudentResultMap" parameterType="long">
+        SELECT
+        id,
+        student_name
+        FROM
+        students
+        WHERE
+        id = #{id}
+    </select>
+
+    <!-- Select Subjects by Student ID -->
+    <select id="selectSubjectsByStudentId" parameterType="long" resultType="com.demo.MybatisApplication.model.Subject">
+        SELECT
+        subject_id,
+        subject_name
+        FROM
+        subjects
+        WHERE
+        student_id = #{id}
+    </select>
+
+</mapper>

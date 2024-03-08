@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.MybatisApplication.repository.TeacherRepository" >
+    <!-- result map for TeacherEntity -->
+    <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">
+        <id property="teacherId" column="teacher_id" />
+        <result property="teacherName" column="teacher_name" />
+        <!-- collection of SubjectEntity -->
+        <collection property="teacherSubjectEntities" ofType="com.demo.MybatisApplication.model.SubjectEntity"
+                    column="teacher_id" select="selectSubjectsByTeacherId" />
+    </resultMap>
+
+    <!-- result map for SubjectEntity -->
+    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
+        <id property="id" column="subject_id" />
+        <result property="subjectName" column="subject_name" />
+    </resultMap>
+
+    <!-- select statement to retrieve a teacher by teacherId -->
+    <select id="selectTeacherById" resultMap="TeacherResultMap" parameterType="long">
+        SELECT
+        teacher_id,
+        teacher_name
+        FROM
+        teachers
+        WHERE
+        teacher_id = #{teacherId}
+    </select>
+
+    <!-- select statement to retrieve subjects of a teacher -->
+    <select id="selectSubjectsByTeacherId" resultMap="SubjectResultMap" parameterType="long">
+        SELECT
+        s.subject_id,
+        s.subject_name
+        FROM
+        subjects s
+        INNER JOIN
+        teacher_subjects ts ON s.subject_id = ts.subject_id
+        WHERE
+        ts.teacher_id = #{teacherId}
+    </select>
+</mapper>
