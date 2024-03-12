@@ -24,7 +24,7 @@ public class SubjectService {
     @Autowired
     SubjectMapper subjectMapper;
 
-    public SubjectEntityDto getSubjectById(@PathVariable Long subjectId){
+    public SubjectEntityDto getSubjectById( Long subjectId){
         return subjectMapper.subjectEntityToSubjectDisplayDto(subjectRepository.selectSubjectById(subjectId));
     }
 
@@ -33,8 +33,8 @@ public class SubjectService {
         return subjects;
     }
 
-    public List<SubjectAdditionDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects) {
-        List<SubjectEntity> subjectEntities = subjectMapper.convertSubjectAddtionDtoToSubjectEntity(subjects);
+    public List<SubjectAdditionDto> addSubjects( List<SubjectAdditionDto> subjects) {
+        List<SubjectEntity> subjectEntities = subjectMapper.convertSubjectAddtionDtosToSubjectEntitities(subjects);
         subjectRepository.addSubjects(subjectEntities);
         return subjects;
     }

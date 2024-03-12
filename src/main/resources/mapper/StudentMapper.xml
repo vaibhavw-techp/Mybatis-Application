@@ -20,19 +20,19 @@
     </resultMap>
 
     <!-- Insert student -->
-    <insert id="addStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id"
+    keyColumn="id">
         INSERT INTO student ( student_name, email, age)
         VALUES (#{studentName}, #{email}, #{age})
     </insert>
 
     <!-- Add subjects to student -->
-    <insert id="addSubjectsToStudent" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addSubjectsToStudent" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO student_subject (student_id, subject_id)
         VALUES
         <foreach collection="subjects" item="subject" separator=",">
             (#{studentId}, #{subject.subjectId})
         </foreach>
-        RETURNING id
     </insert>
 
     <!-- Get student by ID -->

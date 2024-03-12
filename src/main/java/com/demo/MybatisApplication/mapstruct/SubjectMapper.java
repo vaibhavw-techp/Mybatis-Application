@@ -22,6 +22,6 @@ public interface SubjectMapper {
 
     List<SubjectDisplayDto> convertEntityListToDtoList(List<SubjectEntity> subjects);
 
-    List<SubjectEntity> convertSubjectAddtionDtoToSubjectEntity(List<SubjectAdditionDto> subjects);
+    List<SubjectEntity> convertSubjectAddtionDtosToSubjectEntitities(List<SubjectAdditionDto> subjects);
 
 }

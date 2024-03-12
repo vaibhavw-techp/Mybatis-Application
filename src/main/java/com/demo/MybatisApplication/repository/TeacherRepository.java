@@ -12,5 +12,7 @@ public interface TeacherRepository {
     TeacherEntity getTeacherById(long teacherId);
     Object getTeacherStudents(@Param("teacherId") Long teacherId);
 
+    void addTeacher(TeacherEntity teacher);
+
     List<TeacherEntity> getAllTeachers();
 }

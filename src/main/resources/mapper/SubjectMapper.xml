@@ -25,11 +25,8 @@
         SELECT * FROM subject
     </select>
 
-    <!-- Insert student -->
-    <insert id="addSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="subjectId">
-        <selectKey keyProperty="subjectId" order="AFTER" resultType="java.lang.Long">
-            SELECT LASTVAL() AS subjectId
-        </selectKey>
+    <!-- Insert Subject -->
+    <insert id="addSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="subjectId" keyColumn="subject_id">
         <foreach collection="list" item="subject" separator=";">
             INSERT INTO subject (name, teacher_id)
             VALUES (#{subject.name}, #{subject.teacher.teacherId})

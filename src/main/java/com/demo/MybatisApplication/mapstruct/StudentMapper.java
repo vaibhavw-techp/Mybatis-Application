@@ -30,9 +30,5 @@ public interface StudentMapper {
     @Mapping(source = "age", target = "age")
     StudentDisplayByIdDto studentEntityToDisplayByIdDto(StudentEntity entity);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "studentName", target = "studentName")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "age", target = "age")
     List<StudentsDisplayDto> studentEntitiesToDisplayDtos(List<StudentEntity> entities);
 }
