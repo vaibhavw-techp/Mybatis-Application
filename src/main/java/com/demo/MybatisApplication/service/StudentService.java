@@ -29,8 +29,8 @@ public class StudentService {
         return studentMapper.studentEntityToDisplayByIdDto(studentEntity);
     }
 
-    public void addSubjectsToStudent(Long studentId, List<SubjectEntity> subjects) {
-        studentRepository.addSubjectsToStudent(studentId, subjects);
+    public void assignSubjectsToStudent(Long studentId, List<SubjectEntity> subjects) {
+        studentRepository.assignSubjectsToStudent(studentId, subjects);
     }
 
     public StudentDisplayByIdDto addStudent(StudentAddDto student){

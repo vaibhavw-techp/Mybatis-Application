@@ -12,7 +12,7 @@
         <collection property="subjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="getSubjectsByStudentId">
         </collection>
     </resultMap>
-    
+
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
         <id property="id" column="id"/>
         <result property="name" column="name"/>

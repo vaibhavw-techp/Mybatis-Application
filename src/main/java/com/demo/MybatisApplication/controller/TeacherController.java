@@ -2,6 +2,7 @@ package com.demo.MybatisApplication.controller;
 
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
+import com.demo.MybatisApplication.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
