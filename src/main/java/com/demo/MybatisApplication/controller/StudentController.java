@@ -1,47 +1,48 @@
 package com.demo.MybatisApplication.controller;
 
-import com.demo.MybatisApplication.dto.StudentInfoDto;
-import com.demo.MybatisApplication.model.StudentEntity;
+import com.demo.MybatisApplication.dto.StudentAddDto;
+import com.demo.MybatisApplication.dto.StudentDisplayAsSubjects;
+import com.demo.MybatisApplication.dto.StudentDisplayByIdDto;
+import com.demo.MybatisApplication.dto.StudentsDisplayDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
-import com.demo.MybatisApplication.repository.StudentRepository;
-import com.demo.MybatisApplication.repository.SubjectRepository;
+import com.demo.MybatisApplication.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
     @Autowired
-    StudentRepository studentRepository;
+    private StudentService studentService;
 
     @GetMapping("/{id}")
-    public StudentEntity getStudentById(@PathVariable Long id){
-        return studentRepository.getStudentById(id);
+    public StudentDisplayByIdDto getStudentById(@PathVariable Long id){
+        return studentService.getStudentById(id);
     }
 
     @PostMapping("/{studentId}/subjects")
     public void addSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<SubjectEntity> subjects) {
-        studentRepository.addSubjectsToStudent(studentId, subjects);
+        studentService.addSubjectsToStudent(studentId, subjects);
     }
 
-    //Add student
+    // Add student
     @PostMapping
-    public StudentEntity addStudent(@RequestBody StudentEntity student){
-        studentRepository.addStudent(student);
-        return studentRepository.getStudentById(student.getId());
+    public StudentDisplayByIdDto addStudent(@RequestBody StudentAddDto student){
+        return studentService.addStudent(student);
     }
 
     @GetMapping
-    public List<StudentEntity> getAllStudents() {
-        return studentRepository.getAllStudents();
+    public List<StudentsDisplayDto> getAllStudents() {
+        return studentService.getAllStudents();
     }
 
     @GetMapping("/{studentId}/subjects")
-    public StudentEntity getStudentWithSubjects(@PathVariable Long studentId) {
-        return studentRepository.getStudentWithSubjects(studentId);
+    public StudentDisplayAsSubjects getStudentWithSubjects(@PathVariable Long studentId) {
+        return studentService.getStudentWithSubjects(studentId);
     }
 
 }

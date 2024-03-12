@@ -1,8 +1,11 @@
 package com.demo.MybatisApplication.controller;
 
+import com.demo.MybatisApplication.dto.SubjectAdditionDto;
+import com.demo.MybatisApplication.dto.SubjectDisplayDto;
 import com.demo.MybatisApplication.model.StudentEntity;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.repository.SubjectRepository;
+import com.demo.MybatisApplication.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,20 +15,20 @@ import java.util.List;
 @RequestMapping("/subjects")
 public class SubjectController {
     @Autowired
-    SubjectRepository subjectRepository;
+    SubjectService subjectService;
+
     @GetMapping("/{subjectId}")
-    public SubjectEntity getSubjectById(@PathVariable Long subjectId){
-        return subjectRepository.selectSubjectById(subjectId);
+    public SubjectDisplayDto getSubjectById(@PathVariable Long subjectId){
+        return subjectService.getSubjectById(subjectId);
+    }
+    @GetMapping
+    public List<SubjectDisplayDto> getSubjects(){
+        return subjectService.getSubjects();
     }
 
-    @GetMapping
-    public List<SubjectEntity> getSubjects(){
-        return subjectRepository.getAllSubjects();
-    }
     @PostMapping
-    public List<SubjectEntity> addSubjects(@RequestBody List<SubjectEntity> subjects){
-        subjectRepository.addSubjects(subjects);
-        return subjectRepository.getAllSubjects();
+    public List<SubjectAdditionDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects){
+        return subjectService.addSubjects(subjects);
     }
 
 }

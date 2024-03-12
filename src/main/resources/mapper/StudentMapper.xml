@@ -14,8 +14,7 @@
 
     </resultMap>
 
-
-    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
+    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.dto.SubjectDisplayDto">
         <id property="subjectId" column="subject_id"/>
         <result property="name" column="subject_name"/>
     </resultMap>

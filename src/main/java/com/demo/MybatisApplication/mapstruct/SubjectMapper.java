@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SubjectMapper {
-    @Mapping(target = "subjectId", source = "dto.subjectId")
+
     @Mapping(target = "teacher", source = "dto.teacher")
     @Mapping(target = "name", source = "dto.name")
     SubjectEntity subjectAdditionDtoToSubjectEntity(SubjectAdditionDto dto);

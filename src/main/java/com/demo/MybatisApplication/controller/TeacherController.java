@@ -3,6 +3,7 @@ package com.demo.MybatisApplication.controller;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
+import com.demo.MybatisApplication.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     TeacherRepository teacherRepository;
+
+    @Autowired
+    TeacherService teacherService;
 
     @GetMapping("/{teacherId}")
     public TeacherEntity listOfTeachers(@PathVariable long teacherId){
