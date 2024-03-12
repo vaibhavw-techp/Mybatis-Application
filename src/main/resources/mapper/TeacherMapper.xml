@@ -42,4 +42,10 @@
         WHERE s.teacher_id = #{id}
     </select>
 
+    <select id="getTeachersSubjects" resultMap="SubjectResultMap">
+        SELECT s.subject_id, s.name
+        FROM subject s
+        WHERE s.teacher_id = #{teacherId}
+    </select>
+
 </mapper>
