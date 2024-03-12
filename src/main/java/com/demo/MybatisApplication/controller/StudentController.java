@@ -1,6 +1,5 @@
 package com.demo.MybatisApplication.controller;
 
-
 import com.demo.MybatisApplication.dto.StudentAddDto;
 import com.demo.MybatisApplication.dto.StudentDisplayAsSubjects;
 import com.demo.MybatisApplication.dto.StudentDisplayByIdDto;
@@ -21,7 +20,6 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/{id}")
-
     public StudentDisplayByIdDto getStudentById(@PathVariable Long id){
         return studentService.getStudentById(id);
     }
