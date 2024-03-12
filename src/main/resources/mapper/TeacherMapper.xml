@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.demo.MybatisApplication.repository.TeacherRepository" >
-    <!-- result map for TeacherEntity -->
+<mapper namespace="com.demo.MybatisApplication.repository.TeacherRepository">
+
+    <!-- Result map for TeacherEntity -->
     <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">
         <id property="teacherId" column="teacher_id" />
         <result property="teacherName" column="teacher_name" />
-        <collection property="teacherSubjectEntities" ofType="com.demo.MybatisApplication.model.SubjectEntity"
-                    column="teacher_id" select="selectSubjectsByTeacherId" />
+        <result property="age" column="age"/>
+        <result property="email" column="email"/>
     </resultMap>
 
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
-        <id property="id" column="subject_id" />
-        <result property="subjectName" column="subject_name" />
+        <id property="subjectId" column="subject_id" />
+        <result property="name" column="name" />
+        <association property="teacher" resultMap="TeacherResultMap"/>
     </resultMap>
 
-    <select id="selectTeacherById" resultMap="TeacherResultMap" parameterType="long">
-        SELECT
-        teacher_id,
-        teacher_name
-        FROM
-        teachers
-        WHERE
-        teacher_id = #{teacherId}
+    <!-- Get all teachers -->
+    <select id="getAllTeachers" resultMap="TeacherResultMap" resultType="com.demo.MybatisApplication.model.TeacherEntity">
+        SELECT * FROM teacher
     </select>
 
-    <select id="selectSubjectsByTeacherId" resultMap="SubjectResultMap" parameterType="long">
-        SELECT
-        s.subject_id,
-        s.subject_name
-        FROM
-        subjects s
-        INNER JOIN
-        teacher_subjects ts ON s.subject_id = ts.subject_id
-        WHERE
-        ts.teacher_id = #{teacherId}
+    <!-- Get teacher by ID -->
+    <select id="getTeacherById" resultMap="TeacherResultMap" parameterType="Long">
+        SELECT * FROM teacher WHERE teacher_id = #{teacherId}
     </select>
+
+    <select id="getTeacherStudents" resultMap="SubjectResultMap">
+        SELECT s.subject_id, s.name, t.teacher_id, t.teacher_name, t.age, t.email
+        FROM subject s
+        INNER JOIN teacher t ON s.teacher_id = t.teacher_id
+        WHERE s.teacher_id = #{teacherId}
+    </select>
+
 </mapper>

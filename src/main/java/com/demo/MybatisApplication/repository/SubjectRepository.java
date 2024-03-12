@@ -9,4 +9,7 @@ import java.util.List;
 public interface SubjectRepository {
     SubjectEntity selectSubjectById(long subjectId);
 
+    List<SubjectEntity> getAllSubjects();
+
+    void addSubjects(List<SubjectEntity> subject);
 }

@@ -12,5 +12,6 @@ import java.util.List;
 public class TeacherEntity {
     private Long teacherId;
     private String teacherName;
-    private List<SubjectEntity> teacherSubjects;
+    private int age;
+    private String email;
 }
