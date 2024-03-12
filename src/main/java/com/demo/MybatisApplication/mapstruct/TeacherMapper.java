@@ -12,16 +12,16 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TeacherMapper {
 
-    @Mapping(source = "teacherName", target = "teacherName")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "age", target = "age")
     @Mapping(source = "email", target = "email")
     TeacherDisplayDto teacherEntityToTeacherDisplayDto(TeacherEntity entity);
 
-    @Mapping(source = "teacherId", target = "teacherId")
-    @Mapping(source = "teacherName", target = "teacherName")
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "age", target = "age")
     @Mapping(source = "email", target = "email")
     TeacherDisplayWithIdDto teacherEntityToTeacherDisplayWithIdDto(TeacherEntity entity);
 
-    List<TeacherDisplayWithIdDto> getTeacherDiplayIdDtoFromEntity(List<TeacherEntity> teacherEntities);
+    List<TeacherDisplayWithIdDto> teacherDiplayIdDtosFromEntities(List<TeacherEntity> teacherEntities);
 }

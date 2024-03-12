@@ -25,27 +25,27 @@ public class StudentService {
     private StudentMapper studentMapper;
 
     public StudentDisplayByIdDto getStudentById(Long id){
-        StudentEntity studentEntity = studentRepository.getStudentById(id);
+        StudentEntity studentEntity = studentRepository.findStudentById(id);
         return studentMapper.studentEntityToDisplayByIdDto(studentEntity);
     }
 
     public void assignSubjectsToStudent(Long studentId, List<SubjectEntity> subjects) {
-        studentRepository.assignSubjectsToStudent(studentId, subjects);
+        studentRepository.updateSubjectsToStudent(studentId, subjects);
     }
 
     public StudentDisplayByIdDto addStudent(StudentAddDto student){
         StudentEntity studentEntity = studentMapper.studentAddDtoToEntity(student);
-        studentRepository.addStudent(studentEntity);
+        studentRepository.saveStudent(studentEntity);
         return studentMapper.studentEntityToDisplayByIdDto(studentEntity);
     }
 
     public List<StudentsDisplayDto> getAllStudents() {
-        List<StudentEntity> studentEntities = studentRepository.getAllStudents();
+        List<StudentEntity> studentEntities = studentRepository.findAllStudents();
         return studentMapper.studentEntitiesToDisplayDtos(studentEntities);
     }
 
     public StudentDisplayAsSubjects getStudentWithSubjects(Long studentId) {
-        StudentEntity studentEntity = studentRepository.getStudentWithSubjects(studentId);
+        StudentEntity studentEntity = studentRepository.findStudentWithSubjects(studentId);
         return studentMapper.studentEntityToDisplayAsSubjects(studentEntity);
     }
 }

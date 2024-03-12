@@ -15,23 +15,23 @@ import java.util.List;
 public interface StudentMapper {
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "studentName", target = "studentName")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "age", target = "age")
     StudentEntity studentAddDtoToEntity(StudentAddDto dto);
 
-    @Mapping(source = "studentName", target = "studentName")
-    @Mapping(source = "studentSubjects", target = "studentSubjects")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "subjects", target = "subjects")
     StudentDisplayAsSubjects studentEntityToDisplayAsSubjects(StudentEntity entity);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "studentName", target = "studentName")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "age", target = "age")
     StudentDisplayByIdDto studentEntityToDisplayByIdDto(StudentEntity entity);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "studentName", target = "studentName")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "age", target = "age")
     List<StudentsDisplayDto> studentEntitiesToDisplayDtos(List<StudentEntity> entities);

@@ -19,16 +19,16 @@ public class TeacherService {
     @Autowired
     TeacherMapper teacherMapper;
 
-    public TeacherDisplayDto getTeacherById(@PathVariable long teacherId){
-        return teacherMapper.teacherEntityToTeacherDisplayDto(teacherRepository.getTeacherById(teacherId));
+    public TeacherDisplayDto getTeacherById(@PathVariable long id){
+        return teacherMapper.teacherEntityToTeacherDisplayDto(teacherRepository.findTeacherById(id));
     }
 
     public List<TeacherDisplayWithIdDto> getAllTeachers(){
-        List<TeacherDisplayWithIdDto> teachersList = teacherMapper.getTeacherDiplayIdDtoFromEntity(teacherRepository.getAllTeachers());
-        return teachersList;
+        List<TeacherDisplayWithIdDto> teacherDisplayWithIdDtos = teacherMapper.teacherDiplayIdDtosFromEntities(teacherRepository.findAllTeachers());
+        return teacherDisplayWithIdDtos;
     }
 
-    public Object getTeacherWithSubjectsById(@PathVariable Long teacherId) {
-        return teacherRepository.getTeacherStudents(teacherId);
+    public Object getTeacherWithSubjectsById(@PathVariable Long id) {
+        return teacherRepository.findSubjectsAssignedToTeacher(id);
     }
 }

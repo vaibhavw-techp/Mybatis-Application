@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class TeacherDisplayWithIdDto {
-    private Long teacherId;
-    private String teacherName;
+    private Long id;
+    private String name;
     private int age;
     private String email;
 }

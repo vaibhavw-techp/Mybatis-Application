@@ -1,5 +1,8 @@
 package com.demo.MybatisApplication.controller;
 
+
+import com.demo.MybatisApplication.dto.TeacherDisplayDto;
+import com.demo.MybatisApplication.dto.TeacherDisplayWithIdDto;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
 import com.demo.MybatisApplication.service.TeacherService;
@@ -14,22 +17,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/teachers")
 public class TeacherController {
+
     @Autowired
-    TeacherRepository teacherRepository;
+    TeacherService teacherService;
 
     @GetMapping("/{id}")
-    public TeacherEntity listOfTeachers(@PathVariable long id){
-        return teacherRepository.findTeacherById(id);
+    public TeacherDisplayDto getTeacherById(@PathVariable long id){
+        return teacherService.getTeacherById(id);
     }
 
     @GetMapping
-    public List<TeacherEntity> getAllTeachers(){
-        return teacherRepository.findAllTeachers();
+    public List<TeacherDisplayWithIdDto> getAllTeachers(){
+        return teacherService.getAllTeachers();
     }
 
     @GetMapping("/{id}/subjects")
-    public TeacherEntity getTeacherWithSubjectsById(@PathVariable Long id) {
-       return teacherRepository.findSubjectsAssignedToTeacher(id);
+    public Object getTeacherWithSubjectsById(@PathVariable Long id) {
+       return teacherService.getTeacherWithSubjectsById(id);
     }
 
 

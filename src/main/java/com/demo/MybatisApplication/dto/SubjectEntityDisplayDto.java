@@ -3,7 +3,8 @@ package com.demo.MybatisApplication.dto;
 import lombok.Data;
 
 @Data
-public class SubjectDisplayDto {
+public class SubjectEntityDisplayDto {
     private Long id;
     private String name;
+    private TeacherSubjectDisplayDto teacher;
 }

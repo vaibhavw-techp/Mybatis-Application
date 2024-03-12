@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class StudentDisplayAsSubjects {
-    private String studentName;
-    private List<SubjectEntity> studentSubjects;
+    private String name;
+    private List<SubjectEntity> subjects;
 }

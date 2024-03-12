@@ -2,6 +2,7 @@ package com.demo.MybatisApplication.controller;
 
 import com.demo.MybatisApplication.dto.SubjectAdditionDto;
 import com.demo.MybatisApplication.dto.SubjectDisplayDto;
+import com.demo.MybatisApplication.dto.SubjectEntityDisplayDto;
 import com.demo.MybatisApplication.model.StudentEntity;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.repository.SubjectRepository;
@@ -17,9 +18,9 @@ public class SubjectController {
     @Autowired
     SubjectService subjectService;
 
-    @GetMapping("/{subjectId}")
-    public SubjectDisplayDto getSubjectById(@PathVariable Long subjectId){
-        return subjectService.getSubjectById(subjectId);
+    @GetMapping("/{id}")
+    public SubjectEntityDisplayDto getSubjectById(@PathVariable Long id){
+        return subjectService.getSubjectById(id);
     }
     @GetMapping
     public List<SubjectDisplayDto> getSubjects(){
