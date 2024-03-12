@@ -17,8 +17,7 @@
     </resultMap>
 
     <select id="selectSubjectById" resultMap="SubjectResultMap" parameterType="long">
-        SELECT *
-        FROM subject WHERE subject_id = #{subjectId}
+        SELECT subject_id, name, teacher_id FROM subject WHERE subject_id = #{subjectId}
     </select>
 
     <!-- Get All Subjects -->

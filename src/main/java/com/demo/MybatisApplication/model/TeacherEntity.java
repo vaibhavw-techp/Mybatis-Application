@@ -14,4 +14,5 @@ public class TeacherEntity {
     private String teacherName;
     private int age;
     private String email;
+    private List<SubjectEntity> subjects;
 }

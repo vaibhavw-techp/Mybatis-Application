@@ -2,6 +2,7 @@ package com.demo.MybatisApplication.mapstruct;
 
 import com.demo.MybatisApplication.dto.SubjectAdditionDto;
 import com.demo.MybatisApplication.dto.SubjectDisplayDto;
+import com.demo.MybatisApplication.dto.SubjectEntityDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,7 +18,7 @@ public interface SubjectMapper {
 
     @Mapping(target = "subjectId", source = "subjectEntity.subjectId")
     @Mapping(target = "name", source = "subjectEntity.name")
-    SubjectDisplayDto subjectEntityToSubjectDisplayDto(SubjectEntity subjectEntity);
+    SubjectEntityDto subjectEntityToSubjectDisplayDto(SubjectEntity subjectEntity);
 
     List<SubjectDisplayDto> convertEntityListToDtoList(List<SubjectEntity> subjects);
 

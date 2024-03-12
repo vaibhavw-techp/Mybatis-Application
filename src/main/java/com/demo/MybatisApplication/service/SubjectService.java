@@ -2,6 +2,7 @@ package com.demo.MybatisApplication.service;
 
 import com.demo.MybatisApplication.dto.SubjectAdditionDto;
 import com.demo.MybatisApplication.dto.SubjectDisplayDto;
+import com.demo.MybatisApplication.dto.SubjectEntityDto;
 import com.demo.MybatisApplication.mapstruct.SubjectMapper;
 import com.demo.MybatisApplication.model.StudentEntity;
 import com.demo.MybatisApplication.model.SubjectEntity;
@@ -23,7 +24,7 @@ public class SubjectService {
     @Autowired
     SubjectMapper subjectMapper;
 
-    public SubjectDisplayDto getSubjectById(@PathVariable Long subjectId){
+    public SubjectEntityDto getSubjectById(@PathVariable Long subjectId){
         return subjectMapper.subjectEntityToSubjectDisplayDto(subjectRepository.selectSubjectById(subjectId));
     }
 

@@ -1,5 +1,7 @@
 package com.demo.MybatisApplication.controller;
 
+import com.demo.MybatisApplication.dto.TeacherDisplayDto;
+import com.demo.MybatisApplication.dto.TeacherDisplayWithIdDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
@@ -24,18 +26,18 @@ public class TeacherController {
     TeacherService teacherService;
 
     @GetMapping("/{teacherId}")
-    public TeacherEntity listOfTeachers(@PathVariable long teacherId){
-        return teacherRepository.getTeacherById(teacherId);
+    public TeacherDisplayDto listOfTeachers(@PathVariable long teacherId){
+        return teacherService.getTeacherById(teacherId);
     }
 
     @GetMapping
-    public List<TeacherEntity> getAllTeachers(){
-        return teacherRepository.getAllTeachers();
+    public List<TeacherDisplayWithIdDto> getAllTeachers(){
+        return teacherService.getAllTeachers();
     }
 
     @GetMapping("/{teacherId}/subjects")
     public Object getTeacherWithSubjectsById(@PathVariable Long teacherId) {
-       return teacherRepository.getTeacherStudents(teacherId);
+       return teacherService.getTeacherWithSubjectsById(teacherId);
     }
 
 
