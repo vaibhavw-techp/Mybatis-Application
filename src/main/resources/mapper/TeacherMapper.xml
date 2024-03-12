@@ -12,12 +12,17 @@
         <collection property="subjects" column="id" resultMap="SubjectResultMap" ofType="com.demo.MybatisApplication.model.SubjectEntity"/>
     </resultMap>
 
-
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
         <id property="id" column="id" />
         <result property="name" column="name" />
 <!--        <association property="teacher" resultMap="TeacherResultMap"/>-->
     </resultMap>
+
+    <!--    Insert Teacher-->
+    <insert id="saveTeacher" parameterType="com.demo.MybatisApplication.model.TeacherEntity" useGeneratedKeys="true" keyProperty="teacherId" keyColumn="teacher_id">
+        INSERT INTO teacher (name, age, email)
+        VALUES (#{name}, #{age}, #{email})
+    </insert>
 
     <!-- Get all teachers -->
     <select id="findAllTeachers" resultMap="TeacherResultMap" resultType="com.demo.MybatisApplication.model.TeacherEntity">

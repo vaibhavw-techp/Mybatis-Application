@@ -19,25 +19,19 @@
     </resultMap>
 
     <!-- Insert student -->
-    <insert id="saveStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LASTVAL() AS id
-        </selectKey>
-        INSERT INTO student (id, name, email, age)
-        VALUES (#{id}, #{name}, #{email}, #{age})
+    <insert id="saveStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id"
+    keyColumn="id">
+        INSERT INTO student ( student_name, email, age)
+        VALUES (#{studentName}, #{email}, #{age})
     </insert>
 
     <!-- Add subjects to student -->
-    <insert id="updateSubjectsToStudent" useGeneratedKeys="true" keyProperty="id">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LASTVAL() AS id
-        </selectKey>
+    <insert id="updateSubjectsToStudent" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO student_subject (student_id, subject_id)
         VALUES
         <foreach collection="subjects" item="subject" separator=",">
             (#{studentId}, #{subject.id})
         </foreach>
-        RETURNING id
     </insert>
 
     <!-- Get student by ID -->

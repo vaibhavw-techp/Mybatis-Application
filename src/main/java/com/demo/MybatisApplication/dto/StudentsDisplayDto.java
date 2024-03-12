@@ -1,6 +1,5 @@
 package com.demo.MybatisApplication.dto;
 
-import com.demo.MybatisApplication.model.SubjectEntity;
 import lombok.Data;
 
 
