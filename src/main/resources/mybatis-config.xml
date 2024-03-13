@@ -1,0 +1,30 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- Define Type Aliases -->
+    <typeAliases>
+        <!-- Example: -->
+        <!-- <typeAlias alias="Student" type="com.example.Student"/> -->
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="JNDI">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://localhost:5432/mybatis"/>
+                <property name="username" value="postgres"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- Example: -->
+         <mapper resource="mapper/StudentMapper.xml"/>
+         <mapper resource="mapper/SubjectMapper.xml"/>
+         <mapper resource="mapper/TeacherMapper.xml"/>
+    </mappers>
+
+</configuration>

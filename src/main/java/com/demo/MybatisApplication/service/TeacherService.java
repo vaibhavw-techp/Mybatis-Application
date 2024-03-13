@@ -24,8 +24,8 @@ public class TeacherService {
         List<TeacherDisplayWithIdDto> teachersList = teacherMapper.teacherDiplayIdDtosFromEntitiest(teacherRepository.getAllTeachers());
         return teachersList;
     }
-    public Object getTeacherWithSubjectsById(Long teacherId) {
-        return teacherRepository.getTeacherStudents(teacherId);
+    public TeacherSubjectDisplayDto getTeacherWithSubjectsById(Long teacherId) {
+        return teacherMapper.teacherEntityToTeacherSubjectDisplayDto(teacherRepository.getTeacherStudents(teacherId));
     }
 
     public TeacherEntity addTeacher(TeacherAdditionDto teacher){

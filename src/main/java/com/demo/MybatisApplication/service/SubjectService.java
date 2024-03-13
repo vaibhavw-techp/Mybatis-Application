@@ -29,13 +29,13 @@ public class SubjectService {
     }
 
     public List<SubjectDisplayDto> getSubjects(){
-        List<SubjectDisplayDto> subjects = subjectMapper.convertEntityListToDtoList(subjectRepository.getAllSubjects());
+        List<SubjectDisplayDto> subjects = subjectMapper.subjectEntitiesToSubjectDisplayDtos(subjectRepository.getAllSubjects());
         return subjects;
     }
 
-    public List<SubjectAdditionDto> addSubjects( List<SubjectAdditionDto> subjects) {
+    public List<SubjectDisplayDto> addSubjects( List<SubjectAdditionDto> subjects) {
         List<SubjectEntity> subjectEntities = subjectMapper.convertSubjectAddtionDtosToSubjectEntitities(subjects);
         subjectRepository.addSubjects(subjectEntities);
-        return subjects;
+        return subjectMapper.subjectEntitiesToSubjectDisplayDtos(subjectEntities);
     }
 }

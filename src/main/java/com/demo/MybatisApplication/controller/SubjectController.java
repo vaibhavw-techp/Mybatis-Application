@@ -28,7 +28,7 @@ public class SubjectController {
     }
 
     @PostMapping
-    public List<SubjectAdditionDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects){
+    public List<SubjectDisplayDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects){
         return subjectService.addSubjects(subjects);
     }
 
