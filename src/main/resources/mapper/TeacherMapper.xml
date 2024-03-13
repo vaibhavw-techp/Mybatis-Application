@@ -9,14 +9,14 @@
         <result property="age" column="age"/>
         <result property="email" column="email"/>
 
-        <collection property="subjects" column="subjectId" resultMap="SubjectResultMap" ofType="com.demo.MybatisApplication.model.SubjectEntity"/>
+        <collection property="subjects" column="subjectId" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap" ofType="com.demo.MybatisApplication.model.SubjectEntity"/>
     </resultMap>
 
-    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
-        <id property="subjectId" column="subject_id" />
-        <result property="name" column="name" />
-<!--        <association property="teacher" resultMap="TeacherResultMap"/>-->
-    </resultMap>
+<!--    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">-->
+<!--        <id property="subjectId" column="subject_id" />-->
+<!--        <result property="name" column="name" />-->
+<!--&lt;!&ndash;        <association property="teacher" resultMap="TeacherResultMap"/>&ndash;&gt;-->
+<!--    </resultMap>-->
 
     <!--    Insert Teacher-->
     <insert id="addTeacher" parameterType="com.demo.MybatisApplication.model.TeacherEntity" useGeneratedKeys="true" keyProperty="teacherId" keyColumn="teacher_id">
@@ -42,7 +42,7 @@
         WHERE s.teacher_id = #{teacherId}
     </select>
 
-    <select id="getTeachersSubjects" resultMap="SubjectResultMap">
+    <select id="getTeachersSubjects" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">
         SELECT s.subject_id, s.name
         FROM subject s
         WHERE s.teacher_id = #{teacherId}
