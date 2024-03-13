@@ -3,6 +3,7 @@ package com.demo.MybatisApplication.controller;
 import com.demo.MybatisApplication.dto.TeacherAdditionDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayWithIdDto;
+import com.demo.MybatisApplication.dto.TeacherSubjectDisplayDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
@@ -39,7 +40,7 @@ public class TeacherController {
     }
 
     @GetMapping("/{teacherId}/subjects")
-    public Object getTeacherWithSubjectsById(@PathVariable Long teacherId) {
+    public TeacherSubjectDisplayDto getTeacherWithSubjectsById(@PathVariable Long teacherId) {
        return teacherService.getTeacherWithSubjectsById(teacherId);
     }
 }

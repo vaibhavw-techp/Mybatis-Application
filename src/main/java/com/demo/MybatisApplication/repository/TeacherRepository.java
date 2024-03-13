@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface TeacherRepository {
     TeacherEntity getTeacherById(long teacherId);
-    Object getTeacherStudents(@Param("teacherId") Long teacherId);
+    TeacherEntity getTeacherStudents(@Param("teacherId") Long teacherId);
 
     void addTeacher(TeacherEntity teacher);
 

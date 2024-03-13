@@ -20,7 +20,7 @@ public interface SubjectMapper {
     @Mapping(target = "name", source = "subjectEntity.name")
     SubjectEntityDto subjectEntityToSubjectDisplayDto(SubjectEntity subjectEntity);
 
-    List<SubjectDisplayDto> convertEntityListToDtoList(List<SubjectEntity> subjects);
+    List<SubjectDisplayDto> subjectEntitiesToSubjectDisplayDtos(List<SubjectEntity> subjectEntities);
 
     List<SubjectEntity> convertSubjectAddtionDtosToSubjectEntitities(List<SubjectAdditionDto> subjects);
 
