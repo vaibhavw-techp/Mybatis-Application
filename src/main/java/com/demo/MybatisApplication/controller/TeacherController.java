@@ -4,6 +4,7 @@ package com.demo.MybatisApplication.controller;
 import com.demo.MybatisApplication.dto.TeacherAdditionDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayWithIdDto;
+import com.demo.MybatisApplication.dto.TeacherSubjectDisplayDto;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class TeacherController {
         return teacherService.getAllTeachers();
     }
 
-    @GetMapping("/{id}/subjects")
-    public Object getTeacherWithSubjectsById(@PathVariable Long id) {
-       return teacherService.getTeacherWithSubjectsById(id);
+    @GetMapping("/{teacherId}/subject")
+    public TeacherSubjectDisplayDto getTeacherWithSubjectsById(@PathVariable Long teacherId) {
+       return teacherService.getTeacherWithSubjectsById(teacherId);
     }
 }

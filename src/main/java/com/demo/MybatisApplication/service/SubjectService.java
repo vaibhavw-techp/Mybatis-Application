@@ -9,7 +9,6 @@ import com.demo.MybatisApplication.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -26,13 +25,13 @@ public class SubjectService {
     }
 
     public List<SubjectDisplayDto> getSubjects(){
-        List<SubjectDisplayDto> subjects = subjectMapper.EntitiesToDtos(subjectRepository.findAllSubjects());
+        List<SubjectDisplayDto> subjects = subjectMapper.subjectEntitiesToSubjectDisplayDtos(subjectRepository.findAllSubjects());
         return subjects;
     }
 
-    public List<SubjectAdditionDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects) {
+    public List<SubjectDisplayDto> addSubjects( List<SubjectAdditionDto> subjects) {
         List<SubjectEntity> subjectEntities = subjectMapper.SubjectAddtionDtosToSubjectEntities(subjects);
         subjectRepository.saveSubjects(subjectEntities);
-        return subjects;
+        return subjectMapper.subjectEntitiesToSubjectDisplayDtos(subjectEntities);
     }
 }

@@ -26,8 +26,8 @@ public class TeacherService {
         return teacherDisplayWithIdDtos;
     }
 
-    public Object getTeacherWithSubjectsById(@PathVariable Long id) {
-        return teacherRepository.findSubjectsAssignedToTeacher(id);
+    public TeacherSubjectDisplayDto getTeacherWithSubjectsById(Long id) {
+        return teacherMapper.teacherEntityToTeacherSubjectDisplayDto(teacherRepository.findSubjectsAssignedToTeacher(id));
     }
 
     public TeacherEntity addTeacher(TeacherAdditionDto teacher){
