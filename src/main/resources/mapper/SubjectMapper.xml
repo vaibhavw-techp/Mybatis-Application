@@ -20,9 +20,9 @@
     </select>
 
     <!-- Insert Subject -->
-    <insert id="saveSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="subjectId" keyColumn="subject_id">
+    <insert id="saveSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <foreach collection="list" item="subject" separator=";">
-            INSERT INTO subject (name, id)
+            INSERT INTO subject (name, teacher_id)
             VALUES (#{subject.name}, #{subject.teacher.id})
         </foreach>
     </insert>

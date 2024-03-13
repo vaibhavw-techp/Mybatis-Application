@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.demo.MybatisApplication.mapstruct.StudentMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentService {
@@ -47,5 +49,14 @@ public class StudentService {
     public StudentDisplayAsSubjects getStudentWithSubjects(Long studentId) {
         StudentEntity studentEntity = studentRepository.findStudentWithSubjects(studentId);
         return studentMapper.studentEntityToDisplayAsSubjects(studentEntity);
+    }
+
+    public List<StudentsDisplayDto> getAllStudentsWithFilters(String name, Integer age, String email) {
+        Map<String, Object> filters = new HashMap<>();
+        filters.put("name", name);
+        filters.put("age", age);
+        filters.put("email",email);
+        List<StudentEntity> studentEntities = studentRepository.findAllStudentsUsingFilter(filters);
+        return studentMapper.studentEntitiesToDisplayDtos(studentEntities);
     }
 }

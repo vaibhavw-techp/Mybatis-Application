@@ -59,4 +59,19 @@
         WHERE ss.student_id = #{id}
     </select>
 
+    <select id="findAllStudentsUsingFilter" parameterType="map" resultMap="StudentResultMap">
+        SELECT id, name, email, age FROM student
+        <where>
+            <if test="name != null and name != ''">
+                AND name = #{name}
+            </if>
+            <if test="age != null">
+                AND age = #{age}
+            </if>
+            <if test="email != null and email != ''">
+                AND email = #{email}
+            </if>
+        </where>
+    </select>
+
 </mapper>

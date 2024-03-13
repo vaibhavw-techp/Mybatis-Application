@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class StudentDisplayAsSubjects {
     private String name;
-    private List<SubjectEntity> subjects;
+    private List<SubjectDisplayDto> subjects;
 }
