@@ -13,16 +13,11 @@
         </collection>
     </resultMap>
 
-    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-    </resultMap>
-
     <!-- Insert student -->
     <insert id="saveStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id"
     keyColumn="id">
-        INSERT INTO student ( student_name, email, age)
-        VALUES (#{studentName}, #{email}, #{age})
+        INSERT INTO student ( name, email, age)
+        VALUES (#{name}, #{email}, #{age})
     </insert>
 
     <!-- Add subjects to student -->
@@ -51,13 +46,13 @@
     </select>
 
     <!-- Get all students -->
-    <select id="findAllStudents" resultMap="StudentResultMap" resultType="com.demo.MybatisApplication.model.StudentEntity">
+    <select id="findAllStudents" resultMap="StudentResultMap" >
         SELECT id, name, email, age FROM student
-<!--        SELECT id, id,student_id from student_subject;-->
+<!--        SELECT id, subject_id,student_id from student_subject;-->
     </select>
 
     <!-- Get subjects by student ID-->
-    <select id="getSubjectsByStudentId" parameterType="long" resultMap="SubjectResultMap">
+    <select id="getSubjectsByStudentId" parameterType="long" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">
         SELECT sb.id, sb.name AS name
         FROM subject sb
         INNER JOIN student_subject ss ON sb.id = ss.subject_id

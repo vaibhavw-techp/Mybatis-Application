@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class TeacherSubjectDto {
-    private Long teacherId;
+    private Long id;
 }

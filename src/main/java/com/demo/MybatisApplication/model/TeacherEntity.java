@@ -1,5 +1,6 @@
 package com.demo.MybatisApplication.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,6 @@ public class TeacherEntity {
     private String name;
     private int age;
     private String email;
+    @JsonBackReference
     private List<SubjectEntity> subjects;
 }

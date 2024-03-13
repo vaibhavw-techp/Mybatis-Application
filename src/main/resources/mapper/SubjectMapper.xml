@@ -6,14 +6,7 @@
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
         <id property="id" column="id" />
         <result property="name" column="name" />
-        <association property="teacher" resultMap="TeacherResultMap"></association>
-    </resultMap>
-
-    <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">
-        <id property="id" column="id" />
-        <result property="name" column="name" />
-        <result property="age" column="age"/>
-        <result property="email" column="email"/>
+        <association property="teacher" resultMap="com.demo.MybatisApplication.repository.TeacherRepository.TeacherResultMap" />
     </resultMap>
 
     <select id="findSubjectById" resultMap="SubjectResultMap" parameterType="long">
