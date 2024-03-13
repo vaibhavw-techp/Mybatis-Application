@@ -9,13 +9,6 @@
         <association property="teacher" resultMap="com.demo.MybatisApplication.repository.TeacherRepository.TeacherResultMap" />
     </resultMap>
 
-<!--    <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">-->
-<!--        <id property="teacherId" column="teacher_id" />-->
-<!--        <result property="teacherName" column="teacher_name" />-->
-<!--        <result property="age" column="age"/>-->
-<!--        <result property="email" column="email"/>-->
-<!--    </resultMap>-->
-
     <select id="selectSubjectById" resultMap="SubjectResultMap" parameterType="long">
         SELECT subject_id, name, teacher_id FROM subject WHERE subject_id = #{subjectId}
     </select>

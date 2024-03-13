@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StudentRepository {
@@ -18,4 +19,5 @@ public interface StudentRepository {
     StudentEntity getStudentById(Long id);
     StudentEntity getStudentWithSubjects(Long id);
     List<StudentEntity> getAllStudents();
+    List<StudentEntity> getAllStudentsUsingFilter(Map<String, Object> filters);
 }

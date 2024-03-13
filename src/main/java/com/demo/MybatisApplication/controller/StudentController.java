@@ -7,6 +7,7 @@ import com.demo.MybatisApplication.dto.StudentsDisplayDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,14 +36,19 @@ public class StudentController {
         return studentService.addStudent(student);
     }
 
-    @GetMapping
-    public List<StudentsDisplayDto> getAllStudents() {
-        return studentService.getAllStudents();
-    }
-
     @GetMapping("/{studentId}/subjects")
     public StudentDisplayAsSubjects getStudentWithSubjects(@PathVariable Long studentId) {
         return studentService.getStudentWithSubjects(studentId);
     }
 
+    // Filter + ALL
+    @GetMapping
+    public List<StudentsDisplayDto> getAllStudents(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) String email) {
+
+        List<StudentsDisplayDto> students = studentService.getAllStudentsWithFilters(name, age, email);
+        return students;
+    }
 }

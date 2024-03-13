@@ -14,11 +14,6 @@
 
     </resultMap>
 
-<!--    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">-->
-<!--        <id property="subjectId" column="subject_id"/>-->
-<!--        <result property="name" column="subject_name"/>-->
-<!--    </resultMap>-->
-
     <!-- Insert student -->
     <insert id="addStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id"
     keyColumn="id">
@@ -63,6 +58,21 @@
         FROM subject sb
         INNER JOIN student_subject ss ON sb.subject_id = ss.subject_id
         WHERE ss.student_id = #{id}
+    </select>
+
+    <select id="getAllStudentsUsingFilter" parameterType="map" resultMap="StudentResultMap">
+        SELECT id, student_name, email, age FROM student
+        <where>
+            <if test="name != null and name != ''">
+                AND student_name = #{name}
+            </if>
+            <if test="age != null">
+                AND age = #{age}
+            </if>
+            <if test="email != null and email != ''">
+                AND email = #{email}
+            </if>
+        </where>
     </select>
 
 </mapper>
