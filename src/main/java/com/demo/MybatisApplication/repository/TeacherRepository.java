@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface TeacherRepository {
-    TeacherEntity getTeacherById(long teacherId);
-    Object getTeacherStudents(@Param("teacherId") Long teacherId);
+    TeacherEntity findTeacherById(long id);
+    TeacherEntity findSubjectsAssignedToTeacher(@Param("id") Long id);
 
-    List<TeacherEntity> getAllTeachers();
+    List<TeacherEntity> findAllTeachers();
 }

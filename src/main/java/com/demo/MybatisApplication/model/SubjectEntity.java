@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class SubjectEntity {
-    private Long subjectId;
+    private Long id;
     private String name;
     private TeacherEntity teacher;
 }

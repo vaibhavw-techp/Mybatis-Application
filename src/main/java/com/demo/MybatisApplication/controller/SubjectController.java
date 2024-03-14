@@ -13,19 +13,19 @@ import java.util.List;
 public class SubjectController {
     @Autowired
     SubjectRepository subjectRepository;
-    @GetMapping("/{subjectId}")
-    public SubjectEntity getSubjectById(@PathVariable Long subjectId){
-        return subjectRepository.selectSubjectById(subjectId);
+    @GetMapping("/{id}")
+    public SubjectEntity getSubjectById(@PathVariable Long id){
+        return subjectRepository.findSubjectById(id);
     }
 
     @GetMapping
     public List<SubjectEntity> getSubjects(){
-        return subjectRepository.getAllSubjects();
+        return subjectRepository.findAllSubjects();
     }
     @PostMapping
     public List<SubjectEntity> addSubjects(@RequestBody List<SubjectEntity> subjects){
-        subjectRepository.addSubjects(subjects);
-        return subjectRepository.getAllSubjects();
+        subjectRepository.saveSubjects(subjects);
+        return subjectRepository.findAllSubjects();
     }
 
 }

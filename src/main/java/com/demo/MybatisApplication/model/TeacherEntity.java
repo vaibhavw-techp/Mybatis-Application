@@ -10,8 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeacherEntity {
-    private Long teacherId;
-    private String teacherName;
+    private Long id;
+    private String name;
     private int age;
     private String email;
+    List<SubjectEntity> subjects;
 }

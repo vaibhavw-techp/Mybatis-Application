@@ -5,70 +5,68 @@
 
     <resultMap id="StudentResultMap" type="com.demo.MybatisApplication.model.StudentEntity">
         <id property="id" column="id"/>
-        <result property="studentName" column="student_name"/>
+        <result property="name" column="name"/>
         <result property="email" column="email"/>
         <result property="age" column="age"/>
 
-        <collection property="studentSubjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="getSubjectsByStudentId">
+        <collection property="subjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="getSubjectsByStudentId">
         </collection>
-
     </resultMap>
-
-
+    
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
-        <id property="subjectId" column="subject_id"/>
-        <result property="name" column="subject_name"/>
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
     </resultMap>
 
     <!-- Insert student -->
-    <insert id="addStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LASTVAL() AS id
         </selectKey>
-        INSERT INTO student (id, student_name, email, age)
-        VALUES (#{id}, #{studentName}, #{email}, #{age})
+        INSERT INTO student (id, name, email, age)
+        VALUES (#{id}, #{name}, #{email}, #{age})
     </insert>
 
     <!-- Add subjects to student -->
-    <insert id="addSubjectsToStudent" useGeneratedKeys="true" keyProperty="id">
+    <insert id="updateSubjectsToStudent" useGeneratedKeys="true" keyProperty="id">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LASTVAL() AS id
         </selectKey>
         INSERT INTO student_subject (student_id, subject_id)
         VALUES
         <foreach collection="subjects" item="subject" separator=",">
-            (#{studentId}, #{subject.subjectId})
+            (#{studentId}, #{subject.id})
         </foreach>
         RETURNING id
     </insert>
 
     <!-- Get student by ID -->
-    <select id="getStudentById" resultMap="StudentResultMap" parameterType="long">
-        SELECT id, student_name, email, age
+    <select id="findStudentById" resultMap="StudentResultMap" parameterType="long">
+        SELECT id, name, email, age
         FROM student
         WHERE id = #{id}
     </select>
 
     <!-- Get student with subjects -->
-    <select id="getStudentWithSubjects" resultMap="StudentResultMap" parameterType="long">
-        SELECT s.id, s.student_name, s.email, s.age, sb.subject_id, sb.name AS subject_name
+    <select id="findStudentWithSubjects" resultMap="StudentResultMap" parameterType="long">
+        SELECT s.id, s.name, s.email, s.age, sb.id, sb.name AS name
         FROM student s
         LEFT JOIN student_subject ss ON s.id = ss.student_id
-        LEFT JOIN subject sb ON ss.subject_id = sb.subject_id
+        LEFT JOIN subject sb ON ss.subject_id = sb.id
         WHERE s.id = #{id}
     </select>
 
     <!-- Get all students -->
-    <select id="getAllStudents" resultMap="StudentResultMap" resultType="com.demo.MybatisApplication.model.StudentEntity">
-        SELECT id, student_name, email, age FROM student
-<!--        SELECT id, subject_id,student_id from student_subject;-->
+    <select id="findAllStudents" resultMap="StudentResultMap" resultType="com.demo.MybatisApplication.model.StudentEntity">
+        SELECT id, name, email, age FROM student
+<!--        SELECT id, id,student_id from student_subject;-->
     </select>
 
     <!-- Get subjects by student ID-->
-    <select id="getSubjectsByStudentId" parameterType="long" resultMap="SubjectResultMap">
-        SELECT sb.subject_id, sb.name AS subject_name
+    <select id="findSubjectsByStudentId" parameterType="long" resultMap="SubjectResultMap">
+        SELECT sb.id, sb.name AS name
         FROM subject sb
-        INNER JOIN student_subject ss ON sb.subject_id = ss.subject_id
+        INNER JOIN student_subject ss ON sb.id = ss.subject_id
         WHERE ss.student_id = #{id}
     </select>
 

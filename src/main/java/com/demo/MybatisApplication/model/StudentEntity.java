@@ -11,10 +11,10 @@ import java.util.List;
 //@NoArgsConstructor
 public class StudentEntity {
     private Long id;
-    private String studentName;
+    private String name;
     private String email;
     private Integer age;
-    private List<SubjectEntity> studentSubjects;
+    private List<SubjectEntity> subjects;
 
     public Long getId() {
         return id;
@@ -25,11 +25,11 @@ public class StudentEntity {
     }
 
     public String getStudentName() {
-        return studentName;
+        return name;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudentName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -49,10 +49,10 @@ public class StudentEntity {
     }
 
     public List<SubjectEntity> getStudentSubjects() {
-        return studentSubjects;
+        return subjects;
     }
 
-    public void setStudentSubjects(List<SubjectEntity> studentSubjects) {
-        this.studentSubjects = studentSubjects;
+    public void setStudentSubjects(List<SubjectEntity> subjects) {
+        this.subjects = subjects;
     }
 }

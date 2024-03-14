@@ -4,36 +4,36 @@
 <mapper namespace="com.demo.MybatisApplication.repository.SubjectRepository" >
 
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
-        <id property="subjectId" column="subject_id" />
+        <id property="id" column="id" />
         <result property="name" column="name" />
         <association property="teacher" resultMap="TeacherResultMap"></association>
     </resultMap>
 
     <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">
-        <id property="teacherId" column="teacher_id" />
-        <result property="teacherName" column="teacher_name" />
+        <id property="id" column="id" />
+        <result property="name" column="name" />
         <result property="age" column="age"/>
         <result property="email" column="email"/>
     </resultMap>
 
-    <select id="selectSubjectById" resultMap="SubjectResultMap" parameterType="long">
-        SELECT subject_id, subject_name
-        FROM subjects WHERE subject_id = #{subjectId}
+    <select id="findSubjectById" resultMap="SubjectResultMap" parameterType="long">
+        SELECT id, name
+        FROM subject WHERE id = #{id}
     </select>
 
     <!-- Get All Subjects -->
-    <select id="getAllSubjects" resultMap="SubjectResultMap" resultType="com.demo.MybatisApplication.model.SubjectEntity">
+    <select id="findAllSubjects" resultMap="SubjectResultMap" resultType="com.demo.MybatisApplication.model.SubjectEntity">
         SELECT * FROM subject
     </select>
 
     <!-- Insert student -->
-    <insert id="addSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="subjectId">
-        <selectKey keyProperty="subjectId" order="AFTER" resultType="java.lang.Long">
-            SELECT LASTVAL() AS subjectId
+    <insert id="saveSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LASTVAL() AS id
         </selectKey>
         <foreach collection="list" item="subject" separator=";">
-            INSERT INTO subject (name, teacher_id)
-            VALUES (#{subject.name}, #{subject.teacher.teacherId})
+            INSERT INTO subject (name, id)
+            VALUES (#{subject.name}, #{subject.teacher.id})
         </foreach>
     </insert>
 
