@@ -12,10 +12,9 @@ import java.util.Map;
 @Mapper
 public interface StudentRepository {
 
-    void saveStudent(StudentEntity student);
-    void updateSubjectsToStudent(@Param("studentId") Long studentId, @Param("subjects") List<SubjectEntity> subjects);
+    void save(StudentEntity student);
+    void saveAllSubjectsForStudent(@Param("studentId") Long studentId, @Param("subjects") List<SubjectEntity> subjects);
     StudentEntity findStudentById(Long id);
-    StudentEntity findStudentWithSubjects(Long id);
-    List<StudentEntity> findAllStudents();
-    List<StudentEntity> findAllStudentsUsingFilter(Map<String, Object> filters);
+    StudentEntity findBySubjects(Long id);
+    List<StudentEntity> findAll(Map<String, Object> filters);
 }

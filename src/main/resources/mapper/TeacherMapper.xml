@@ -13,13 +13,13 @@
     </resultMap>
 
     <!--    Insert Teacher-->
-    <insert id="saveTeacher" parameterType="com.demo.MybatisApplication.model.TeacherEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="save" parameterType="com.demo.MybatisApplication.model.TeacherEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO teacher (name, age, email)
         VALUES (#{name}, #{age}, #{email})
     </insert>
 
     <!-- Get all teachers -->
-    <select id="findAllTeachers" resultMap="TeacherResultMap" resultType="com.demo.MybatisApplication.model.TeacherEntity">
+    <select id="findAll" resultMap="TeacherResultMap" resultType="com.demo.MybatisApplication.model.TeacherEntity">
         SELECT * FROM teacher
     </select>
 
@@ -28,23 +28,11 @@
         SELECT * FROM teacher WHERE id = #{id}
     </select>
 
-    <select id="findSubjectsAssignedToTeacher" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">
+    <select id="findAllByTeacher" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">
         SELECT s.id, s.name, t.id, t.name, t.age, t.email
         FROM subject s
         INNER JOIN teacher t ON s.id = t.id
         WHERE s.id = #{id}
     </select>
-
-<!--    <select id="getTeachersSubjects" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">-->
-<!--        SELECT s.id, s.name-->
-<!--        FROM subject s-->
-<!--        WHERE s.id = #{id}-->
-<!--    </select>-->
-
-<!--    <select id="getTeachersSubjects" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">-->
-<!--        SELECT s.subject_id, s.name-->
-<!--        FROM subject s-->
-<!--        WHERE s.teacher_id = #{teacherId}-->
-<!--    </select>-->
 
 </mapper>

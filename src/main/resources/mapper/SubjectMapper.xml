@@ -15,12 +15,12 @@
     </select>
 
     <!-- Get All Subjects -->
-    <select id="findAllSubjects" resultMap="SubjectResultMap" resultType="com.demo.MybatisApplication.model.SubjectEntity">
+    <select id="findAll" resultMap="SubjectResultMap" resultType="com.demo.MybatisApplication.model.SubjectEntity">
         SELECT * FROM subject
     </select>
 
     <!-- Insert Subject -->
-    <insert id="saveSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="saveAll" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         <foreach collection="list" item="subject" separator=";">
             INSERT INTO subject (name, teacher_id)
             VALUES (#{subject.name}, #{subject.teacher.id})

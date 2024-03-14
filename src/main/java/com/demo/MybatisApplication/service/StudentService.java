@@ -32,22 +32,17 @@ public class StudentService {
     }
 
     public void assignSubjectsToStudent(Long studentId, List<SubjectEntity> subjects) {
-        studentRepository.updateSubjectsToStudent(studentId, subjects);
+        studentRepository.saveAllSubjectsForStudent(studentId, subjects);
     }
 
     public StudentDisplayByIdDto addStudent(StudentAddDto student){
         StudentEntity studentEntity = studentMapper.studentAddDtoToEntity(student);
-        studentRepository.saveStudent(studentEntity);
+        studentRepository.save(studentEntity);
         return studentMapper.studentEntityToDisplayByIdDto(studentEntity);
     }
 
-    public List<StudentsDisplayDto> getAllStudents() {
-        List<StudentEntity> studentEntities = studentRepository.findAllStudents();
-        return studentMapper.studentEntitiesToDisplayDtos(studentEntities);
-    }
-
     public StudentDisplayAsSubjects getStudentWithSubjects(Long studentId) {
-        StudentEntity studentEntity = studentRepository.findStudentWithSubjects(studentId);
+        StudentEntity studentEntity = studentRepository.findBySubjects(studentId);
         return studentMapper.studentEntityToDisplayAsSubjects(studentEntity);
     }
 
@@ -56,7 +51,7 @@ public class StudentService {
         filters.put("name", name);
         filters.put("age", age);
         filters.put("email",email);
-        List<StudentEntity> studentEntities = studentRepository.findAllStudentsUsingFilter(filters);
+        List<StudentEntity> studentEntities = studentRepository.findAll(filters);
         return studentMapper.studentEntitiesToDisplayDtos(studentEntities);
     }
 }

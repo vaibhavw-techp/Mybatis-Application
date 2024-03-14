@@ -7,7 +7,6 @@ import com.demo.MybatisApplication.dto.StudentsDisplayDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public class StudentController {
             @RequestParam(required = false) Integer age,
             @RequestParam(required = false) String email) {
 
-        List<StudentsDisplayDto> students = studentService.getAllStudentsWithFilters(name, age, email);
-        return students;
+        List<StudentsDisplayDto> studentsDisplayDtos = studentService.getAllStudentsWithFilters(name, age, email);
+        return studentsDisplayDtos;
     }
 }

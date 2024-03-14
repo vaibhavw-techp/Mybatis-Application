@@ -10,7 +10,7 @@ import java.util.List;
 public interface TeacherRepository {
 
     TeacherEntity findTeacherById(long id);
-    TeacherEntity findSubjectsAssignedToTeacher(@Param("id") Long id);
-    List<TeacherEntity> findAllTeachers();
-    void saveTeacher(TeacherEntity teacher);
+    TeacherEntity findAllByTeacher(@Param("id") Long id);
+    List<TeacherEntity> findAll();
+    void save(TeacherEntity teacher);
 }

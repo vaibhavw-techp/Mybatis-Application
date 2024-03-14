@@ -7,7 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface SubjectRepository {
+
     SubjectEntity findSubjectById(long id);
-    List<SubjectEntity> findAllSubjects();
-    void saveSubjects(List<SubjectEntity> subjects);
+    List<SubjectEntity> findAll();
+    void saveAll(List<SubjectEntity> subjects);
 }

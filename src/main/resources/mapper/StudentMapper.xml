@@ -9,19 +9,19 @@
         <result property="email" column="email"/>
         <result property="age" column="age"/>
 
-        <collection property="subjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="getSubjectsByStudentId">
+        <collection property="subjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="findSubjectsByStudentId">
         </collection>
     </resultMap>
 
     <!-- Insert student -->
-    <insert id="saveStudent" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id"
+    <insert id="save" parameterType="com.demo.MybatisApplication.model.StudentEntity" useGeneratedKeys="true" keyProperty="id"
     keyColumn="id">
         INSERT INTO student ( name, email, age)
         VALUES (#{name}, #{email}, #{age})
     </insert>
 
     <!-- Add subjects to student -->
-    <insert id="updateSubjectsToStudent" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="saveAllSubjectsForStudent" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO student_subject (student_id, subject_id)
         VALUES
         <foreach collection="subjects" item="subject" separator=",">
@@ -37,7 +37,7 @@
     </select>
 
     <!-- Get student with subjects -->
-    <select id="findStudentWithSubjects" resultMap="StudentResultMap" parameterType="long">
+    <select id="findBySubjects" resultMap="StudentResultMap" parameterType="long">
         SELECT s.id, s.name, s.email, s.age, sb.id, sb.name AS name
         FROM student s
         LEFT JOIN student_subject ss ON s.id = ss.student_id
@@ -45,21 +45,21 @@
         WHERE s.id = #{id}
     </select>
 
-    <!-- Get all students -->
-    <select id="findAllStudents" resultMap="StudentResultMap" >
-        SELECT id, name, email, age FROM student
-<!--        SELECT id, subject_id,student_id from student_subject;-->
-    </select>
+<!--    &lt;!&ndash; Get all students &ndash;&gt;-->
+<!--    <select id="findAll" resultMap="StudentResultMap" >-->
+<!--        SELECT id, name, email, age FROM student-->
+<!--&lt;!&ndash;        SELECT id, subject_id,student_id from student_subject;&ndash;&gt;-->
+<!--    </select>-->
 
     <!-- Get subjects by student ID-->
-    <select id="getSubjectsByStudentId" parameterType="long" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">
+    <select id="findSubjectsByStudentId" parameterType="long" resultMap="com.demo.MybatisApplication.repository.SubjectRepository.SubjectResultMap">
         SELECT sb.id, sb.name AS name
         FROM subject sb
         INNER JOIN student_subject ss ON sb.id = ss.subject_id
         WHERE ss.student_id = #{id}
     </select>
 
-    <select id="findAllStudentsUsingFilter" parameterType="map" resultMap="StudentResultMap">
+    <select id="findAll" parameterType="map" resultMap="StudentResultMap">
         SELECT id, name, email, age FROM student
         <where>
             <if test="name != null and name != ''">
