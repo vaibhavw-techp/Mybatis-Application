@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.MybatisApplication.repository.SubjectRepository" >
+
+    <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <association property="teacher" resultMap="TeacherResultMap"></association>
+    </resultMap>
+
+    <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="age" column="age"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <select id="findSubjectById" resultMap="SubjectResultMap" parameterType="long">
+        SELECT id, name
+        FROM subject WHERE id = #{id}
+    </select>
+
+    <!-- Get All Subjects -->
+    <select id="findAllSubjects" resultMap="SubjectResultMap" resultType="com.demo.MybatisApplication.model.SubjectEntity">
+        SELECT * FROM subject
+    </select>
+
+    <!-- Insert student -->
+    <insert id="saveSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LASTVAL() AS id
+        </selectKey>
+        <foreach collection="list" item="subject" separator=";">
+            INSERT INTO subject (name, id)
+            VALUES (#{subject.name}, #{subject.teacher.id})
+        </foreach>
+    </insert>
+
+</mapper>
