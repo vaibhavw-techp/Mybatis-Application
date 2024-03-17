@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.demo.MybatisApplication.mapstruct.StudentMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentService {
@@ -30,22 +32,26 @@ public class StudentService {
     }
 
     public void assignSubjectsToStudent(Long studentId, List<SubjectEntity> subjects) {
-        studentRepository.updateSubjectsToStudent(studentId, subjects);
+        studentRepository.saveAllSubjectsForStudent(studentId, subjects);
     }
 
     public StudentDisplayByIdDto addStudent(StudentAddDto student){
         StudentEntity studentEntity = studentMapper.studentAddDtoToEntity(student);
-        studentRepository.saveStudent(studentEntity);
+        studentRepository.save(studentEntity);
         return studentMapper.studentEntityToDisplayByIdDto(studentEntity);
     }
 
-    public List<StudentsDisplayDto> getAllStudents() {
-        List<StudentEntity> studentEntities = studentRepository.findAllStudents();
-        return studentMapper.studentEntitiesToDisplayDtos(studentEntities);
+    public StudentDisplayAsSubjects getStudentWithSubjects(Long studentId) {
+        StudentEntity studentEntity = studentRepository.findBySubjects(studentId);
+        return studentMapper.studentEntityToDisplayAsSubjects(studentEntity);
     }
 
-    public StudentDisplayAsSubjects getStudentWithSubjects(Long studentId) {
-        StudentEntity studentEntity = studentRepository.findStudentWithSubjects(studentId);
-        return studentMapper.studentEntityToDisplayAsSubjects(studentEntity);
+    public List<StudentsDisplayDto> getAllStudentsWithFilters(String name, Integer age, String email) {
+        Map<String, Object> filters = new HashMap<>();
+        filters.put("name", name);
+        filters.put("age", age);
+        filters.put("email",email);
+        List<StudentEntity> studentEntities = studentRepository.findAll(filters);
+        return studentMapper.studentEntitiesToDisplayDtos(studentEntities);
     }
 }
