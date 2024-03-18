@@ -1,10 +1,10 @@
 package com.demo.MybatisApplication.controller;
 
 
-import com.demo.MybatisApplication.dto.StudentAddDto;
-import com.demo.MybatisApplication.dto.StudentDisplayAsSubjects;
-import com.demo.MybatisApplication.dto.StudentDisplayByIdDto;
-import com.demo.MybatisApplication.dto.StudentsDisplayDto;
+import com.demo.MybatisApplication.dto.StudentAdditionDto;
+import com.demo.MybatisApplication.dto.StudentSubjectsDisplayDto;
+import com.demo.MybatisApplication.dto.StudentDisplayDto;
+import com.demo.MybatisApplication.dto.SubjectEntityDisplayDto;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +21,28 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/{id}")
-
-    public StudentDisplayByIdDto getStudentById(@PathVariable Long id){
+    public StudentDisplayDto getStudentById(@PathVariable Long id){
         return studentService.getStudentById(id);
     }
 
     @PostMapping("/{studentId}/subjects")
-    public void assignSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<SubjectEntity> subjects) {
+    public void assignSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<SubjectEntityDisplayDto> subjects) {
         studentService.assignSubjectsToStudent(studentId, subjects);
     }
 
     // Add student
     @PostMapping
-    public StudentDisplayByIdDto addStudent(@RequestBody StudentAddDto student){
+    public StudentDisplayDto addStudent(@RequestBody StudentAdditionDto student){
         return studentService.addStudent(student);
     }
 
     @GetMapping
-    public List<StudentsDisplayDto> getAllStudents() {
+    public List<StudentDisplayDto> getAllStudents() {
         return studentService.getAllStudents();
     }
 
     @GetMapping("/{studentId}/subjects")
-    public StudentDisplayAsSubjects getStudentWithSubjects(@PathVariable Long studentId) {
+    public StudentSubjectsDisplayDto getStudentWithSubjects(@PathVariable Long studentId) {
         return studentService.getStudentWithSubjects(studentId);
     }
 

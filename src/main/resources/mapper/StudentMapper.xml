@@ -9,7 +9,7 @@
         <result property="email" column="email"/>
         <result property="age" column="age"/>
 
-        <collection property="subjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="getSubjectsByStudentId">
+        <collection property="subjects" column="id" ofType="com.demo.MybatisApplication.model.SubjectEntity" select="findSubjectsByStudentId">
         </collection>
     </resultMap>
 

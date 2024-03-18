@@ -25,16 +25,16 @@ public class SubjectService {
     SubjectMapper subjectMapper;
 
     public SubjectEntityDisplayDto getSubjectById(@PathVariable Long id){
-        return subjectMapper.subjectEntityToSubjectDisplayDto(subjectRepository.findSubjectById(id));
+        return subjectMapper.mapSubjectEntityToSubjectDisplayDto(subjectRepository.findSubjectById(id));
     }
 
     public List<SubjectDisplayDto> getSubjects(){
-        List<SubjectDisplayDto> subjects = subjectMapper.EntitiesToDtos(subjectRepository.findAllSubjects());
+        List<SubjectDisplayDto> subjects = subjectMapper.mapSubjectEntitiesToDtos(subjectRepository.findAllSubjects());
         return subjects;
     }
 
     public List<SubjectAdditionDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects) {
-        List<SubjectEntity> subjectEntities = subjectMapper.SubjectAddtionDtosToSubjectEntities(subjects);
+        List<SubjectEntity> subjectEntities = subjectMapper.mapSubjectAddtionDtosToSubjectEntities(subjects);
         subjectRepository.saveSubjects(subjectEntities);
         return subjects;
     }

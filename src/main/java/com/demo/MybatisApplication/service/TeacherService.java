@@ -1,7 +1,7 @@
 package com.demo.MybatisApplication.service;
 
 import com.demo.MybatisApplication.dto.TeacherDisplayDto;
-import com.demo.MybatisApplication.dto.TeacherDisplayWithIdDto;
+import com.demo.MybatisApplication.dto.TeacherEntityDisplayDto;
 import com.demo.MybatisApplication.mapstruct.TeacherMapper;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
@@ -20,15 +20,15 @@ public class TeacherService {
     TeacherMapper teacherMapper;
 
     public TeacherDisplayDto getTeacherById(@PathVariable long id){
-        return teacherMapper.teacherEntityToTeacherDisplayDto(teacherRepository.findTeacherById(id));
+        return teacherMapper.mapTeacherEntityToTeacherDisplayDto(teacherRepository.findTeacherById(id));
     }
 
-    public List<TeacherDisplayWithIdDto> getAllTeachers(){
-        List<TeacherDisplayWithIdDto> teacherDisplayWithIdDtos = teacherMapper.teacherDiplayIdDtosFromEntities(teacherRepository.findAllTeachers());
+    public List<TeacherEntityDisplayDto> getAllTeachers(){
+        List<TeacherEntityDisplayDto> teacherDisplayWithIdDtos = teacherMapper.mapTeacherEntitiesToTeacherEntityDisplayDto(teacherRepository.findAllTeachers());
         return teacherDisplayWithIdDtos;
     }
 
-    public Object getTeacherWithSubjectsById(@PathVariable Long id) {
+    public TeacherEntity getTeacherWithSubjectsById(@PathVariable Long id) {
         return teacherRepository.findSubjectsAssignedToTeacher(id);
     }
 }
