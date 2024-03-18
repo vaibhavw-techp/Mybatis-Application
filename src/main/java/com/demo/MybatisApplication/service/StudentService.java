@@ -5,7 +5,6 @@ import com.demo.MybatisApplication.dto.StudentSubjectsDisplayDto;
 import com.demo.MybatisApplication.dto.StudentDisplayDto;
 import com.demo.MybatisApplication.dto.SubjectEntityDisplayDto;
 import com.demo.MybatisApplication.mapstruct.SubjectMapper;
-import com.demo.MybatisApplication.mapstruct.SubjectMapperImpl;
 import com.demo.MybatisApplication.model.StudentEntity;
 import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.model.TeacherEntity;
@@ -26,21 +25,17 @@ public class StudentService {
 
     public StudentDisplayDto getStudentById(Long id){
         StudentEntity studentEntity = studentRepository.findStudentById(id);
-        return studentMapper.mapStudentEntityToDisplayByIdDto(studentEntity);
+        return studentMapper.mapStudentEntityToStudentDisplayDto(studentEntity);
     }
 
-    public void assignSubjectsToStudent(Long studentId, List<SubjectEntityDisplayDto> subjects) {
-        SubjectMapperImpl subjectMapper = new SubjectMapperImpl();
-        List<SubjectEntity> subjectEntities = subjects.stream()
-                .map(subjectMapper::mapSubjectEntityDisplayDtoToSubjectEntity)
-                .collect(Collectors.toList());
-        studentRepository.updateSubjectsToStudent(studentId, subjectEntities);
+    public void assignSubjectsToStudent(Long studentId, List<Long> subjectIds){
+        studentRepository.updateSubjectsToStudent(studentId, subjectIds);
     }
 
     public StudentDisplayDto addStudent(StudentAdditionDto student){
-        StudentEntity studentEntity = studentMapper.mapStudentAddDtoToEntity(student);
+        StudentEntity studentEntity = studentMapper.mapStudentAddDtoToStudentEntity(student);
         studentRepository.saveStudent(studentEntity);
-        return studentMapper.mapStudentEntityToDisplayByIdDto(studentEntity);
+        return studentMapper.mapStudentEntityToStudentDisplayDto(studentEntity);
     }
 
     public List<StudentDisplayDto> getAllStudents() {

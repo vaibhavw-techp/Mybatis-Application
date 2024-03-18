@@ -16,7 +16,7 @@ public interface StudentMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "age", target = "age")
-    StudentEntity mapStudentAddDtoToEntity(StudentAdditionDto dto);
+    StudentEntity mapStudentAddDtoToStudentEntity(StudentAdditionDto dto);
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "subjects", target = "subjects")
@@ -26,7 +26,7 @@ public interface StudentMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "age", target = "age")
-    StudentDisplayDto mapStudentEntityToDisplayByIdDto(StudentEntity entity);
+    StudentDisplayDto mapStudentEntityToStudentDisplayDto(StudentEntity studentEntity);
 
-    List<StudentDisplayDto> mapStudentEntitiesToDisplayDtos(List<StudentEntity> entities);
+    List<StudentDisplayDto> mapStudentEntitiesToDisplayDtos(List<StudentEntity> studentEntities);
 }

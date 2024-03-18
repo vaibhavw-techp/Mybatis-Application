@@ -4,8 +4,6 @@ package com.demo.MybatisApplication.controller;
 import com.demo.MybatisApplication.dto.StudentAdditionDto;
 import com.demo.MybatisApplication.dto.StudentSubjectsDisplayDto;
 import com.demo.MybatisApplication.dto.StudentDisplayDto;
-import com.demo.MybatisApplication.dto.SubjectEntityDisplayDto;
-import com.demo.MybatisApplication.model.SubjectEntity;
 import com.demo.MybatisApplication.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +24,8 @@ public class StudentController {
     }
 
     @PostMapping("/{studentId}/subjects")
-    public void assignSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<SubjectEntityDisplayDto> subjects) {
-        studentService.assignSubjectsToStudent(studentId, subjects);
+    public void assignSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<Long> subjectIds) {
+        studentService.assignSubjectsToStudent(studentId, subjectIds);
     }
 
     // Add student

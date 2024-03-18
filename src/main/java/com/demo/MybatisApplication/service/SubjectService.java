@@ -25,6 +25,7 @@ public class SubjectService {
     SubjectMapper subjectMapper;
 
     public SubjectEntityDisplayDto getSubjectById(@PathVariable Long id){
+        System.out.println(subjectRepository.findSubjectById(id));
         return subjectMapper.mapSubjectEntityToSubjectDisplayDto(subjectRepository.findSubjectById(id));
     }
 

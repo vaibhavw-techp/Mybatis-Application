@@ -6,7 +6,7 @@
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
         <id property="id" column="id" />
         <result property="name" column="name" />
-        <association property="teacher" resultMap="TeacherResultMap"></association>
+        <association property="teacher" column="teacher_id" javaType="com.demo.MybatisApplication.model.TeacherEntity" select="selectTeacherBySubjectId" />
     </resultMap>
 
     <resultMap id="TeacherResultMap" type="com.demo.MybatisApplication.model.TeacherEntity">
@@ -16,9 +16,8 @@
         <result property="email" column="email"/>
     </resultMap>
 
-    <select id="findSubjectById" resultMap="SubjectResultMap" parameterType="long">
-        SELECT id, name
-        FROM subject WHERE id = #{id}
+    <select id="findSubjectById" resultMap="SubjectResultMap" parameterType="java.lang.Long">
+        select * from subject where id = #{id}
     </select>
 
     <!-- Get All Subjects -->
@@ -26,15 +25,17 @@
         SELECT * FROM subject
     </select>
 
+    <select id="selectTeacherBySubjectId" parameterType="java.lang.Long" resultMap="TeacherResultMap">
+        select t.id, t.name, t.age, t.email from teacher t INNER JOIN subject s on t.id = s.teacher_id where s.id = #{id}
+    </select>
+
     <!-- Insert student -->
     <insert id="saveSubjects" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-<!--        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">-->
-<!--            SELECT LASTVAL() AS id-->
-<!--        </selectKey>-->
         <foreach collection="list" item="subject" separator=";">
             INSERT INTO subject (name, teacher_id)
             VALUES (#{subject.name}, #{subject.teacher.id})
         </foreach>
     </insert>
+
 
 </mapper>

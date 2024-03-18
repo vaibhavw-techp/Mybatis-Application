@@ -34,10 +34,10 @@
         </selectKey>
         INSERT INTO student_subject (student_id, subject_id)
         VALUES
-        <foreach collection="subjects" item="subject" separator=",">
-            (#{studentId}, #{subject.id})
+        <foreach collection="subjectIds" item="subjectId" separator=",">
+            (#{studentId}, #{subjectId})
         </foreach>
-        RETURNING id
+
     </insert>
 
     <!-- Get student by ID -->
@@ -59,7 +59,6 @@
     <!-- Get all students -->
     <select id="findAllStudents" resultMap="StudentResultMap" resultType="com.demo.MybatisApplication.model.StudentEntity">
         SELECT id, name, email, age FROM student
-<!--        SELECT id, id,student_id from student_subject;-->
     </select>
 
     <!-- Get subjects by student ID-->

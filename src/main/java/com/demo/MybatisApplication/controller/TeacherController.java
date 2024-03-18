@@ -8,6 +8,7 @@ import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
 import com.demo.MybatisApplication.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class TeacherController {
     TeacherService teacherService;
 
     @PostMapping
-    public TeacherEntity addTeacher(@RequestBody TeacherAdditionDto teacherAdditionDto){
+    public ResponseEntity<TeacherEntityDisplayDto> addTeacher(@RequestBody TeacherAdditionDto teacherAdditionDto){
         return teacherService.addTeacher(teacherAdditionDto);
     }
 

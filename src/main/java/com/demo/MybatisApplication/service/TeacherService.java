@@ -7,6 +7,7 @@ import com.demo.MybatisApplication.mapstruct.TeacherMapper;
 import com.demo.MybatisApplication.model.TeacherEntity;
 import com.demo.MybatisApplication.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -25,18 +26,18 @@ public class TeacherService {
     }
 
     public List<TeacherEntityDisplayDto> getAllTeachers(){
-        List<TeacherEntityDisplayDto> teacherDisplayWithIdDtos = teacherMapper.mapTeacherEntitiesToTeacherEntityDisplayDto(teacherRepository.findAllTeachers());
-        return teacherDisplayWithIdDtos;
+        List<TeacherEntityDisplayDto> teacherEntityDisplayDtos = teacherMapper.mapTeacherEntitiesToTeacherEntityDisplayDto(teacherRepository.findAllTeachers());
+        return teacherEntityDisplayDtos;
     }
 
-    public TeacherEntity addTeacher(TeacherAdditionDto teacher){
+    public ResponseEntity<TeacherEntityDisplayDto> addTeacher(TeacherAdditionDto teacher){
         if (teacher.getName() == null || teacher.getName().isEmpty()) {
             throw new IllegalArgumentException("Teacher name cannot be null or empty");
         }
 
-        TeacherEntity teacherEntity = teacherMapper.teacherAddDtoToTeacherEntity(teacher);
+        TeacherEntity teacherEntity = teacherMapper.mapTeacherAddDtoToTeacherEntity(teacher);
         teacherRepository.save(teacherEntity);
-        return teacherEntity;
+        return ResponseEntity.ok().body(teacherMapper.mapTeacherEntityToTeacherEntityDisplayDto(teacherEntity));
     }
 
 }

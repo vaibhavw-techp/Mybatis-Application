@@ -27,7 +27,7 @@ public interface TeacherMapper {
     @Mapping(source = "teacherAddDto.name", target = "name")
     @Mapping(source = "teacherAddDto.age", target = "age")
     @Mapping(source = "teacherAddDto.email", target = "email")
-    TeacherEntity teacherAddDtoToTeacherEntity(TeacherAdditionDto teacherAddDto);
+    TeacherEntity mapTeacherAddDtoToTeacherEntity(TeacherAdditionDto teacherAddDto);
 
     List<TeacherEntityDisplayDto> mapTeacherEntitiesToTeacherEntityDisplayDto(List<TeacherEntity> teacherEntities);
 }

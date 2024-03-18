@@ -13,7 +13,7 @@ public interface StudentRepository {
 
     void saveStudent(StudentEntity student);
 
-    void updateSubjectsToStudent(@Param("studentId") Long studentId, @Param("subjects") List<SubjectEntity> subjects);
+    void updateSubjectsToStudent(@Param("studentId") Long studentId, @Param("subjectIds") List<Long> subjectIds);
 
     StudentEntity findStudentById(Long id);
 
