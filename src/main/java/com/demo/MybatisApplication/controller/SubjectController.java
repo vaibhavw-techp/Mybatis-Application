@@ -3,10 +3,8 @@ package com.demo.MybatisApplication.controller;
 import com.demo.MybatisApplication.dto.SubjectAdditionDto;
 import com.demo.MybatisApplication.dto.SubjectDisplayDto;
 import com.demo.MybatisApplication.dto.SubjectEntityDisplayDto;
-import com.demo.MybatisApplication.model.StudentEntity;
-import com.demo.MybatisApplication.model.SubjectEntity;
-import com.demo.MybatisApplication.repository.SubjectRepository;
 import com.demo.MybatisApplication.service.SubjectService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ public class SubjectController {
     }
 
     @PostMapping
-    public List<SubjectAdditionDto> addSubjects(@RequestBody List<SubjectAdditionDto> subjects){
+    public List<SubjectAdditionDto> addSubjects(@Valid @RequestBody List<SubjectAdditionDto> subjects){
         return subjectService.addSubjects(subjects);
     }
 

@@ -4,9 +4,8 @@ package com.demo.MybatisApplication.controller;
 import com.demo.MybatisApplication.dto.TeacherAdditionDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayDto;
 import com.demo.MybatisApplication.dto.TeacherEntityDisplayDto;
-import com.demo.MybatisApplication.model.TeacherEntity;
-import com.demo.MybatisApplication.repository.TeacherRepository;
 import com.demo.MybatisApplication.service.TeacherService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class TeacherController {
     TeacherService teacherService;
 
     @PostMapping
-    public ResponseEntity<TeacherEntityDisplayDto> addTeacher(@RequestBody TeacherAdditionDto teacherAdditionDto){
+    public ResponseEntity<TeacherEntityDisplayDto> addTeacher(@Valid @RequestBody TeacherAdditionDto teacherAdditionDto){
         return teacherService.addTeacher(teacherAdditionDto);
     }
 

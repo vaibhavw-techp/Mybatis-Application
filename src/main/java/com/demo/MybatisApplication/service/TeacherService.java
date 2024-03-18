@@ -17,12 +17,15 @@ import java.util.List;
 public class TeacherService {
     @Autowired
     TeacherRepository teacherRepository;
-
     @Autowired
     TeacherMapper teacherMapper;
 
     public TeacherDisplayDto getTeacherById(@PathVariable long id){
-        return teacherMapper.mapTeacherEntityToTeacherDisplayDto(teacherRepository.findTeacherById(id));
+        TeacherEntity teacherEntity = teacherRepository.findTeacherById(id);
+        if (teacherEntity == null) {
+            throw new RuntimeException("Teacher not found with ID: " + id);
+        }
+        return teacherMapper.mapTeacherEntityToTeacherDisplayDto(teacherEntity);
     }
 
     public List<TeacherEntityDisplayDto> getAllTeachers(){

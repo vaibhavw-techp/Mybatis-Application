@@ -8,7 +8,6 @@
         <result property="name" column="name" />
         <result property="age" column="age"/>
         <result property="email" column="email"/>
-
         <collection property="subjects" column="id" resultMap="SubjectResultMap" ofType="com.demo.MybatisApplication.model.SubjectEntity"/>
     </resultMap>
 
@@ -16,7 +15,6 @@
     <resultMap id="SubjectResultMap" type="com.demo.MybatisApplication.model.SubjectEntity">
         <id property="id" column="id" />
         <result property="name" column="name" />
-<!--        <association property="teacher" resultMap="TeacherResultMap"/>-->
     </resultMap>
 
     <!--    Insert Teacher-->

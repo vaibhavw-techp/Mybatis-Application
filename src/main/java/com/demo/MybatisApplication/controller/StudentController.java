@@ -5,32 +5,32 @@ import com.demo.MybatisApplication.dto.StudentAdditionDto;
 import com.demo.MybatisApplication.dto.StudentSubjectsDisplayDto;
 import com.demo.MybatisApplication.dto.StudentDisplayDto;
 import com.demo.MybatisApplication.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+   @Autowired
+   private StudentService studentService;
 
     @GetMapping("/{id}")
-    public StudentDisplayDto getStudentById(@PathVariable Long id){
+    public ResponseEntity<?> getStudentById(@PathVariable Long id){
         return studentService.getStudentById(id);
     }
 
     @PostMapping("/{studentId}/subjects")
-    public void assignSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<Long> subjectIds) {
-        studentService.assignSubjectsToStudent(studentId, subjectIds);
+    public ResponseEntity<String> assignSubjectsToStudent(@PathVariable Long studentId,@Valid @RequestBody List<Long> subjectIds) {
+       return studentService.assignSubjectsToStudent(studentId, subjectIds);
     }
 
     // Add student
     @PostMapping
-    public StudentDisplayDto addStudent(@RequestBody StudentAdditionDto student){
+    public StudentDisplayDto addStudent(@Valid @RequestBody StudentAdditionDto student){
         return studentService.addStudent(student);
     }
 
