@@ -1,5 +1,6 @@
 package com.demo.MybatisApplication.service;
 
+import com.demo.MybatisApplication.dto.TeacherAdditionDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayDto;
 import com.demo.MybatisApplication.dto.TeacherEntityDisplayDto;
 import com.demo.MybatisApplication.mapstruct.TeacherMapper;
@@ -28,7 +29,14 @@ public class TeacherService {
         return teacherDisplayWithIdDtos;
     }
 
-    public TeacherEntity getTeacherWithSubjectsById(@PathVariable Long id) {
-        return teacherRepository.findSubjectsAssignedToTeacher(id);
+    public TeacherEntity addTeacher(TeacherAdditionDto teacher){
+        if (teacher.getName() == null || teacher.getName().isEmpty()) {
+            throw new IllegalArgumentException("Teacher name cannot be null or empty");
+        }
+
+        TeacherEntity teacherEntity = teacherMapper.teacherAddDtoToTeacherEntity(teacher);
+        teacherRepository.save(teacherEntity);
+        return teacherEntity;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.demo.MybatisApplication.mapstruct;
 
+import com.demo.MybatisApplication.dto.TeacherAdditionDto;
 import com.demo.MybatisApplication.dto.TeacherDisplayDto;
 import com.demo.MybatisApplication.dto.TeacherEntityDisplayDto;
 import com.demo.MybatisApplication.model.TeacherEntity;
@@ -22,6 +23,11 @@ public interface TeacherMapper {
     @Mapping(source = "age", target = "age")
     @Mapping(source = "email", target = "email")
     TeacherEntityDisplayDto mapTeacherEntityToTeacherEntityDisplayDto(TeacherEntity entity);
+
+    @Mapping(source = "teacherAddDto.name", target = "name")
+    @Mapping(source = "teacherAddDto.age", target = "age")
+    @Mapping(source = "teacherAddDto.email", target = "email")
+    TeacherEntity teacherAddDtoToTeacherEntity(TeacherAdditionDto teacherAddDto);
 
     List<TeacherEntityDisplayDto> mapTeacherEntitiesToTeacherEntityDisplayDto(List<TeacherEntity> teacherEntities);
 }

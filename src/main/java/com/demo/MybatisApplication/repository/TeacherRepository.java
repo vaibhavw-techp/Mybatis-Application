@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 public interface TeacherRepository {
     TeacherEntity findTeacherById(long id);
-    TeacherEntity findSubjectsAssignedToTeacher(@Param("id") Long id);
     List<TeacherEntity> findAllTeachers();
+    void save(TeacherEntity teacher);
 }

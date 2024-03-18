@@ -19,6 +19,12 @@
 <!--        <association property="teacher" resultMap="TeacherResultMap"/>-->
     </resultMap>
 
+    <!--    Insert Teacher-->
+    <insert id="save" parameterType="com.demo.MybatisApplication.model.TeacherEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO teacher (name, age, email)
+        VALUES (#{name}, #{age}, #{email})
+    </insert>
+
     <!-- Get all teachers -->
     <select id="findAllTeachers" resultMap="TeacherResultMap" resultType="com.demo.MybatisApplication.model.TeacherEntity">
         SELECT * FROM teacher
