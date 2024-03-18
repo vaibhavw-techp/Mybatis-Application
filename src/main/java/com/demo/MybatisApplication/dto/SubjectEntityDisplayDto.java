@@ -6,5 +6,5 @@ import lombok.Data;
 public class SubjectEntityDisplayDto {
     private Long id;
     private String name;
-    private TeacherSubjectDisplayDto teacher;
+    private Long teacherId;
 }
