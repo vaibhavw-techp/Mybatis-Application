@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.MybatisApplication.repository.mgrepository.MessRepository">
+
+    <resultMap id="MessResultMap" type="com.demo.MybatisApplication.model.mgmodel.MessEntity">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="capacity" column="capacity" />
+        <result property="location" column="location" />
+    </resultMap>
+
+    <select id="findAll" resultMap="MessResultMap">
+       SELECT * from Mess
+    </select>
+
+</mapper>
