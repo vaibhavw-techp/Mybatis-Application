@@ -22,7 +22,7 @@
     </select>
 
     <select id="findOwnerByMessId" resultMap="MessOwnerResultMap" parameterType="long">
-        SELECT * from mess_owner Where id = #{id}
+        SELECT * FROM mess_owner WHERE mess_id = #{messId}
     </select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.demo.MybatisApplication.controller.mgcontroller;
 
 import com.demo.MybatisApplication.dto.mgdto.MessAdditionDto;
 import com.demo.MybatisApplication.dto.mgdto.MessDisplayDto;
+import com.demo.MybatisApplication.dto.mgdto.MessOwnerDisplayInfoDto;
 import com.demo.MybatisApplication.model.mgmodel.MessOwnerEntity;
 import com.demo.MybatisApplication.service.mgservice.MessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class MessController {
     }
 
     @GetMapping("{messId}/owners")
-    public ResponseEntity<MessOwnerEntity> getOwnerByMessId(@PathVariable Long messId){
-        MessOwnerEntity messOwner = messService.getOwnerByMessId(messId);
+    public ResponseEntity<MessOwnerDisplayInfoDto> getOwnerByMessId(@PathVariable Long messId){
+        MessOwnerDisplayInfoDto messOwner = messService.getOwnerByMessId(messId);
         return ResponseEntity.ok().body(messOwner);
     }
 

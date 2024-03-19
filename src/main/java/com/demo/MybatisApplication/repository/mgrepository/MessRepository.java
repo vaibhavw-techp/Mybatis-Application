@@ -15,9 +15,6 @@ public interface MessRepository {
     void save(MessEntity mess);
 
     List<MessEntity> findAll();
-
-    MessOwnerEntity findOwnerByMessId(Long id);
-
     MessEntity findMessById(Long id);
 
 }

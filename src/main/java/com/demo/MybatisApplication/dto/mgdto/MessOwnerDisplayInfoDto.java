@@ -7,5 +7,5 @@ import java.util.List;
 @Data
 public class MessOwnerDisplayInfoDto {
     private String name;
-    private List<MessOwnerDisplayDto> messOwners;
+    private List<MessOwnerDisplayDto> owner;
 }

@@ -38,10 +38,10 @@ public class MessService {
         return messMapper.mapMessEntitiesToMessDisplayDtos(messRepository.findAll());
     }
 
-    public MessOwnerDisplayInfoDto getOwnerByMessId(Long id){
+    public MessOwnerDisplayInfoDto getOwnerByMessId(Long id) {
         MessEntity messEntity = messRepository.findMessById(id);
         List<MessOwnerEntity> messOwnerEntities = messOwnerRepository.findOwnerByMessId(id);
-        return messRepository.findOwnerByMessId(id);
+        return messMapper.mapToMessOwnerDisplayInfoDto(messEntity, messOwnerEntities);
     }
 
 }

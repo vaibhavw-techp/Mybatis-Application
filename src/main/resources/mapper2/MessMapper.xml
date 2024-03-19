@@ -23,9 +23,4 @@
         Select * from Mess where id = #{id}
     </select>
 
-    <select id="findOwnerByMessId" resultMap="com.demo.MybatisApplication.repository.mgrepository.MessOwnerRepository.MessOwnerResultMap" parameterType="long">
-        SELECT * FROM mess_owner WHERE mess_id = #{messId}
-    </select>
-
-
 </mapper>
