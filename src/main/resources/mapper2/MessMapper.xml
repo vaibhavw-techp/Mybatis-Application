@@ -7,11 +7,25 @@
         <result property="name" column="name" />
         <result property="capacity" column="capacity" />
         <result property="location" column="location" />
-        <association property="messOwner" resultMap="com.demo.MybatisApplication.repository.mgrepository.MessOwnerRepository.MessOwnerResultMap" />
     </resultMap>
+
+    <insert id="save" parameterType="com.demo.MybatisApplication.model.mgmodel.MessEntity" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        INSERT INTO Mess (name, capacity, location)
+        VALUES (#{name}, #{capacity}, #{location})
+    </insert>
 
     <select id="findAll" resultMap="MessResultMap">
        SELECT * from Mess
     </select>
+
+    <select id="findMessById" resultMap="MessResultMap" parameterType="long">
+        Select * from Mess where id = #{id}
+    </select>
+
+    <select id="findOwnerByMessId" resultMap="com.demo.MybatisApplication.repository.mgrepository.MessOwnerRepository.MessOwnerResultMap" parameterType="long">
+        SELECT * FROM mess_owner WHERE mess_id = #{messId}
+    </select>
+
 
 </mapper>
