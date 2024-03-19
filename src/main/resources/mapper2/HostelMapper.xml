@@ -10,12 +10,10 @@
         <result property="numRooms" column="num_rooms" />
     </resultMap>
 
-
     <insert id="save" parameterType="com.demo.MybatisApplication.model.mgmodel.HostelEntity">
         INSERT INTO Hostel (name, address, capacity, num_rooms)
         VALUES (#{name}, #{address}, #{capacity}, #{numRooms})
     </insert>
-
 
     <select id="findAll" resultMap="HostelResultMap">
        SELECT * from Hostel

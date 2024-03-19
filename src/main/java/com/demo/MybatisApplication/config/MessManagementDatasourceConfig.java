@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.stereotype.Component;
 import org.apache.tomcat.jdbc.pool.DataSource;
 
 @MapperScan(value = "com.demo.MybatisApplication",
@@ -48,11 +47,6 @@ public class MessManagementDatasourceConfig {
     public SqlSessionTemplate sqlSessionTemplate2(@Qualifier("sqlSessionFactory2") final SqlSessionFactory sqlSessionFactory2) {
         return new SqlSessionTemplate(sqlSessionFactory2);
     }
-
-//    @Bean(name = "hostelRepository")
-//    public HostelRepository hostelRepository(@Qualifier("sqlSessionTemplate2") SqlSessionTemplate sqlSessionTemplate2) {
-//        return sqlSessionTemplate2.getMapper(HostelRepository.class);
-//    }
 
     @Bean
     @Primary

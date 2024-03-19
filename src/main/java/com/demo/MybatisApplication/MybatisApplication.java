@@ -25,9 +25,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		)
 )
 @SpringBootApplication
-@MapperScan("com.demo.MybatisApplication.repository")
+@MapperScan({"com.demo.MybatisApplication.repository","com.demo.MybatisApplication.repository.mgrepository"})
 public class MybatisApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(MybatisApplication.class, args);
 	}
