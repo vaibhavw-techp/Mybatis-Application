@@ -1,5 +1,7 @@
 package com.demo.MybatisApplication.controller.mgcontroller;
 
+import com.demo.MybatisApplication.dto.mgdto.HostelAdditionDto;
+import com.demo.MybatisApplication.dto.mgdto.HostelDisplayDto;
 import com.demo.MybatisApplication.model.mgmodel.HostelEntity;
 import com.demo.MybatisApplication.service.mgservice.HostelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,13 @@ public class HostelController {
     private HostelService hostelService;
 
     @PostMapping
-    public ResponseEntity<HostelEntity> createHostel(@RequestBody HostelEntity hostel) {
-        HostelEntity createdHostel = hostelService.createHostel(hostel);
-        return ResponseEntity.ok().body(createdHostel);
+    public ResponseEntity<HostelDisplayDto> createHostel(@RequestBody HostelAdditionDto hostel) {
+        return ResponseEntity.ok().body(hostelService.createHostel(hostel));
     }
 
     @GetMapping
-    public ResponseEntity<List<HostelEntity>> getAllHostels() {
-        List<HostelEntity> hostels = hostelService.getAllHostels();
+    public ResponseEntity<List<HostelDisplayDto>> getAllHostels() {
+        List<HostelDisplayDto> hostels = hostelService.getAllHostels();
         return ResponseEntity.ok().body(hostels);
     }
 

@@ -13,6 +13,7 @@ public interface MessOwnerRepository {
 
     void save(MessOwnerEntity messOwner);
 
+    List<MessOwnerEntity> findOwnerByMessId(Long id);
     List<MessOwnerEntity> findAll();
 
 }

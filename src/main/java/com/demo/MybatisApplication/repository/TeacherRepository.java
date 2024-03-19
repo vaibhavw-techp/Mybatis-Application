@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-@SchoolManagementSQLConnMapper("StudentMapper")
+@SchoolManagementSQLConnMapper("TeacherMapper")
 public interface TeacherRepository {
 
     TeacherEntity findTeacherById(long id);

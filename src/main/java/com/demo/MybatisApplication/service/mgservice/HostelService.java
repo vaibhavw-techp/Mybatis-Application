@@ -1,5 +1,8 @@
 package com.demo.MybatisApplication.service.mgservice;
 
+import com.demo.MybatisApplication.dto.mgdto.HostelAdditionDto;
+import com.demo.MybatisApplication.dto.mgdto.HostelDisplayDto;
+import com.demo.MybatisApplication.mapstruct.mgmapstruct.HostelMapper;
 import com.demo.MybatisApplication.model.mgmodel.HostelEntity;
 import com.demo.MybatisApplication.repository.mgrepository.HostelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +15,19 @@ import java.util.List;
 public class HostelService {
 
     @Autowired
-//    @Qualifier("sqlSessionTemplate2")
     private HostelRepository hostelRepository;
 
-//    @Autowired
-//    public HostelService(@Qualifier("sqlSessionTemplate2") HostelRepository hostelRepository) {
-//        this.hostelRepository = hostelRepository;
-//    }
+    @Autowired
+    private HostelMapper hostelMapper;
 
-    public HostelEntity createHostel(HostelEntity hostel) {
-        hostelRepository.save(hostel);
-        return hostel;
+    public HostelDisplayDto createHostel(HostelAdditionDto hostel) {
+        HostelEntity hostelEntity = hostelMapper.mapHostelAdditionDtoToHostelEntity(hostel);
+        hostelRepository.save(hostelEntity);
+        return hostelMapper.mapHostelEntityToHostelDisplayDto(hostelEntity);
     }
 
-    public List<HostelEntity> getAllHostels() {
-        return hostelRepository.findAll();
+    public List<HostelDisplayDto> getAllHostels() {
+        return hostelMapper.mapHostelEntitiesToHostelDisplayDtos(hostelRepository.findAll());
     }
 
 }

@@ -1,5 +1,10 @@
 package com.demo.MybatisApplication.controller.mgcontroller;
 
+import com.demo.MybatisApplication.dto.mgdto.MessDisplayDto;
+import com.demo.MybatisApplication.dto.mgdto.MessOwnerAdditionDto;
+import com.demo.MybatisApplication.dto.mgdto.MessOwnerDisplayDto;
+import com.demo.MybatisApplication.mapstruct.mgmapstruct.MessOwnerMapper;
+import com.demo.MybatisApplication.model.mgmodel.MessEntity;
 import com.demo.MybatisApplication.model.mgmodel.MessOwnerEntity;
 import com.demo.MybatisApplication.service.mgservice.MessOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +20,15 @@ public class MessOwnerController {
     @Autowired
     private MessOwnerService messOwnerService;
 
+
     @PostMapping
-    public ResponseEntity<MessOwnerEntity> createMessOwner(@RequestBody MessOwnerEntity messOwner) {
-        MessOwnerEntity createdMessOwner = messOwnerService.createMessOwner(messOwner);
-        return ResponseEntity.ok().body(createdMessOwner);
+    public ResponseEntity<MessOwnerDisplayDto> createMessOwner(@RequestBody MessOwnerAdditionDto messOwnerAdditionDto) {
+        return ResponseEntity.ok().body(messOwnerService.createMessOwner(messOwnerAdditionDto));
     }
 
     @GetMapping
-    public ResponseEntity<List<MessOwnerEntity>> getAllMessOwners() {
-        List<MessOwnerEntity> messOwners = messOwnerService.getAllMessOwners();
-        return ResponseEntity.ok().body(messOwners);
+    public ResponseEntity<List<MessOwnerDisplayDto>> getAllMessOwners() {
+        return ResponseEntity.ok().body(messOwnerService.getAllMessOwners());
     }
 
 }

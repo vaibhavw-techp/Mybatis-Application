@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-@SchoolManagementSQLConnMapper("StudentMapper")
+@SchoolManagementSQLConnMapper("SubjectMapper")
 public interface SubjectRepository {
 
     SubjectEntity findSubjectById(long id);
