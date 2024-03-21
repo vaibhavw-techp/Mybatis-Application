@@ -33,7 +33,7 @@ public class StudentService {
         }
 
         StudentDisplayDto studentDisplayDto = studentMapper.mapStudentEntityToStudentDisplayDto(studentEntity);
-        return ResponseEntity.ok(studentDisplayDto);
+        return ResponseEntity.ok().body(studentDisplayDto);
     }
 
     public ResponseEntity<String> assignSubjectsToStudent(Long studentId, List<Long> subjectIds) {
@@ -65,8 +65,12 @@ public class StudentService {
         return studentMapper.mapStudentEntitiesToDisplayDtos(studentEntities);
     }
 
-    public StudentSubjectsDisplayDto getStudentWithSubjects(Long studentId) {
+    public ResponseEntity<?> getStudentWithSubjects(Long studentId) {
         StudentEntity studentEntity = studentRepository.findStudentWithSubjects(studentId);
-        return studentMapper.mapStudentEntityToStudentSubjectsDisplayDto(studentEntity);
+        if (studentEntity == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Student with id " + studentId + " not found");
+        }
+        return ResponseEntity.ok().body(studentMapper.mapStudentEntityToStudentSubjectsDisplayDto(studentEntity));
     }
 }

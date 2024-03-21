@@ -40,7 +40,7 @@ public class StudentController {
     }
 
     @GetMapping("/{studentId}/subjects")
-    public StudentSubjectsDisplayDto getStudentWithSubjects(@PathVariable Long studentId) {
+    public ResponseEntity<?> getStudentWithSubjects(@PathVariable Long studentId) {
         return studentService.getStudentWithSubjects(studentId);
     }
 
