@@ -1,39 +1,37 @@
 package com.demo.MybatisApplication.controller;
 
-import com.demo.MybatisApplication.model.SubjectEntity;
-import com.demo.MybatisApplication.model.TeacherEntity;
-import com.demo.MybatisApplication.repository.TeacherRepository;
+
+import com.demo.MybatisApplication.dto.TeacherAdditionDto;
+import com.demo.MybatisApplication.dto.TeacherDisplayDto;
+import com.demo.MybatisApplication.dto.TeacherEntityDisplayDto;
+import com.demo.MybatisApplication.service.TeacherService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/teachers")
 public class TeacherController {
+
     @Autowired
-    TeacherRepository teacherRepository;
+    TeacherService teacherService;
+
+    @PostMapping
+    public ResponseEntity<TeacherEntityDisplayDto> addTeacher(@Valid @RequestBody TeacherAdditionDto teacherAdditionDto){
+        return teacherService.addTeacher(teacherAdditionDto);
+    }
 
     @GetMapping("/{id}")
-    public TeacherEntity listOfTeachers(@PathVariable long id){
-        return teacherRepository.findTeacherById(id);
+    public TeacherDisplayDto getTeacherById(@PathVariable long id){
+        return teacherService.getTeacherById(id);
     }
 
     @GetMapping
-    public List<TeacherEntity> getAllTeachers(){
-        return teacherRepository.findAllTeachers();
+    public List<TeacherEntityDisplayDto> getAllTeachers(){
+        return teacherService.getAllTeachers();
     }
-
-    @GetMapping("/{id}/subjects")
-    public TeacherEntity getTeacherWithSubjectsById(@PathVariable Long id) {
-       return teacherRepository.findSubjectsAssignedToTeacher(id);
-    }
-
 
 }

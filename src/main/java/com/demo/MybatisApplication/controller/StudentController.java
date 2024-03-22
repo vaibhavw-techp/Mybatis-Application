@@ -1,46 +1,47 @@
 package com.demo.MybatisApplication.controller;
 
-import com.demo.MybatisApplication.model.StudentEntity;
-import com.demo.MybatisApplication.model.SubjectEntity;
-import com.demo.MybatisApplication.repository.StudentRepository;
-import com.demo.MybatisApplication.repository.SubjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
+import com.demo.MybatisApplication.dto.StudentAdditionDto;
+import com.demo.MybatisApplication.dto.StudentSubjectsDisplayDto;
+import com.demo.MybatisApplication.dto.StudentDisplayDto;
+import com.demo.MybatisApplication.service.StudentService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    StudentRepository studentRepository;
+   @Autowired
+   private StudentService studentService;
 
     @GetMapping("/{id}")
-    public StudentEntity getStudentById(@PathVariable Long id){
-        return studentRepository.findStudentById(id);
+    public ResponseEntity<?> getStudentById(@PathVariable Long id){
+        return studentService.getStudentById(id);
     }
 
     @PostMapping("/{studentId}/subjects")
-    public void assignSubjectsToStudent(@PathVariable Long studentId, @RequestBody List<SubjectEntity> subjects) {
-        studentRepository.updateSubjectsToStudent(studentId, subjects);
+    public ResponseEntity<String> assignSubjectsToStudent(@PathVariable Long studentId,@Valid @RequestBody List<Long> subjectIds) {
+       return studentService.assignSubjectsToStudent(studentId, subjectIds);
     }
 
-    //Add student
+    // Add student
     @PostMapping
-    public StudentEntity addStudent(@RequestBody StudentEntity student){
-        studentRepository.saveStudent(student);
-        return studentRepository.findStudentById(student.getId());
+    public StudentDisplayDto addStudent(@Valid @RequestBody StudentAdditionDto student){
+        return studentService.addStudent(student);
     }
 
     @GetMapping
-    public List<StudentEntity> getAllStudents() {
-        return studentRepository.findAllStudents();
+    public List<StudentDisplayDto> getAllStudents() {
+        return studentService.getAllStudents();
     }
 
     @GetMapping("/{studentId}/subjects")
-    public StudentEntity getStudentWithSubjects(@PathVariable Long studentId) {
-        return studentRepository.findStudentWithSubjects(studentId);
+    public ResponseEntity<?> getStudentWithSubjects(@PathVariable Long studentId) {
+        return studentService.getStudentWithSubjects(studentId);
     }
 
 }
